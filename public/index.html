@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartBio Books</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f8f6;
+      color: #16302a;
+    }
+
+    header {
+      background: #0b5d45;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 25px;
+      font-weight: bold;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 55px 20px;
+      background: #e0f4e9;
+    }
+
+    .hero h1 {
+      font-size: 40px;
+      margin-bottom: 10px;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 35px auto;
+      padding: 20px;
+    }
+
+    .book {
+      background: white;
+      padding: 30px;
+      border-radius: 18px;
+      box-shadow: 0 8px 30px #0001;
+    }
+
+    .cover {
+      height: 230px;
+      background: #d8eee3;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-size: 28px;
+      font-weight: bold;
+      color: #0b5d45;
+    }
+
+    .price {
+      font-size: 28px;
+      font-weight: bold;
+      color: #0b5d45;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      box-sizing: border-box;
+      margin: 10px 0 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    button {
+      background: #0b5d45;
+      color: white;
+      border: none;
+      padding: 15px 25px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    #message {
+      margin-top: 15px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  🧬 SmartBio Books
+</header>
+
+<section class="hero">
+  <h1>Biology Made Easier</h1>
+  <p>Learn. Understand. Excel.</p>
+</section>
+
+<div class="container">
+
+  <div class="book">
+
+    <div class="cover">
+      SECTION 4<br>
+      ORGANISMS
+    </div>
+
+    <h2>Organisms</h2>
+
+    <p>
+      <strong>Diversity of Living Things and Their Environment</strong>
+    </p>
+
+    <p>
+      A digital Biology learning resource for students and learners.
+    </p>
+
+    <p class="price">GH¢30</p>
+
+    <label>Email address</label>
+
+    <input
+      id="email"
+      type="email"
+      placeholder="Enter your email"
+    >
+
+    <button onclick="buyBook()">
+      Buy Now — GH¢30
+    </button>
+
+    <p id="message"></p>
+
+  </div>
+
+</div>
+
+<script>
+async function buyBook() {
+
+  const email = document.getElementById("email").value;
+  const message = document.getElementById("message");
+
+  if (!email) {
+    message.textContent = "Please enter your email.";
+    return;
+  }
+
+  message.textContent = "Opening secure payment...";
+
+  try {
+
+    const response = await fetch("/api/initialize", {
+      method: "POST",
+
+      headers: {
+        "Content-Type": "application/json"
+      },
+
+      body: JSON.stringify({
+        email: email
+      })
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.error || "Payment could not start.");
+    }
+
+    window.location.href = data.authorization_url;
+
+  } catch (error) {
+
+    message.textContent = error.message;
+
+  }
+}
+</script>
+
+</body>
+      </html>

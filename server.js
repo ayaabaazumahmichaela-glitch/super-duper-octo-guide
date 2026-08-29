@@ -7,8 +7,16 @@ const SECRET_KEY = process.env.PAYSTACK_SECRET_KEY;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Serve the website files
 app.use(express.static(path.join(__dirname, "public")));
 
+// Homepage
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
+});
+
+// Start Paystack payment
 app.post("/api/initialize", async (req, res) => {
   try {
     if (!SECRET_KEY) {
@@ -42,7 +50,7 @@ app.post("/api/initialize", async (req, res) => {
             price: "GH¢30"
           },
           callback_url:
-            "https://YOUR-RENDER-URL.onrender.com/success.html"
+            "https://smartbio-books.onrender.com/success.html"
         })
       }
     );
@@ -60,22 +68,29 @@ app.post("/api/initialize", async (req, res) => {
     });
 
   } catch (error) {
+    console.error(error);
+
     res.status(500).json({
       error: "Something went wrong."
     });
   }
 });
 
+// Verify payment and allow PDF download
 app.get("/api/download", async (req, res) => {
   try {
     if (!SECRET_KEY) {
-      return res.status(500).send("Payment system is not configured.");
+      return res.status(500).send(
+        "Payment system is not configured."
+      );
     }
 
     const reference = req.query.reference;
 
     if (!reference) {
-      return res.status(400).send("Missing payment reference.");
+      return res.status(400).send(
+        "Missing payment reference."
+      );
     }
 
     const response = await fetch(
@@ -95,7 +110,9 @@ app.get("/api/download", async (req, res) => {
       data.data.amount !== 3000 ||
       data.data.currency !== "GHS"
     ) {
-      return res.status(403).send("Payment could not be verified.");
+      return res.status(403).send(
+        "Payment could not be verified."
+      );
     }
 
     res.download(
@@ -104,10 +121,17 @@ app.get("/api/download", async (req, res) => {
     );
 
   } catch (error) {
-    res.status(500).send("Download verification failed.");
+    console.error(error);
+
+    res.status(500).send(
+      "Download verification failed."
+    );
   }
 });
 
+// Start server
 app.listen(PORT, () => {
-  console.log(`SmartBio Books running on port ${PORT}`);
+  console.log(
+    `SmartBio Books running on port ${PORT}`
+  );
 });

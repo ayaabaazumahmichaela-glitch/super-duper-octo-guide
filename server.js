@@ -49,8 +49,8 @@ app.post("/api/initialize", async (req, res) => {
             product: "Organisms",
             price: "GH¢30"
           },
-          callback_url:
-            "https://smartbio-books.onrender.com/success.html"
+            callback_url:
+    "https://smartbio-books.onrender.com/api/download"
         })
       }
     );

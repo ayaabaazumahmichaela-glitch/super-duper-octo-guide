@@ -115,11 +115,10 @@ app.get("/api/download", async (req, res) => {
         "Payment could not be verified."
       );
     }
-
     res.download(
-      path.join(__dirname, "organisms.pdf"),
-      "SmartBio-Books-Organisms.pdf"
-    );
+  path.join(__dirname, "public", "organisms.pdf"),
+  "SmartBio-Books-Organisms.pdf"
+);
 
   } catch (error) {
     console.error(error);

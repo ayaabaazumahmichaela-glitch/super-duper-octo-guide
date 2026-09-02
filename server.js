@@ -116,7 +116,7 @@ app.get("/api/download", async (req, res) => {
       );
     }
     res.download(
-  path.join(__dirname, "public", "organisms.pdf"),
+  path.join(__dirname, "Biology_Section_4_New_Cover.pdf"),
   "SmartBio-Books-Organisms.pdf"
 );
 

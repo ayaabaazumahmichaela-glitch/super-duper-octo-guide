@@ -85,53 +85,239 @@
     }
   </style>
 </head>
-
+  
 <body>
-
-<header>
-  🧬 SmartBio Books
+  <header>
+  📚 SmartBio Books
 </header>
 
 <section class="hero">
-  <h1>Biology Made Easier</h1>
-  <p>Learn. Understand. Excel.</p>
+  <h1>Learn. Discover. Imagine. Grow.</h1>
+
+  <p>
+    Welcome to SmartBio Books — a place where knowledge meets imagination.
+    Explore educational materials arranged subject by subject, or discover
+    engaging stories filled with adventure, mystery, wisdom and life lessons.
+  </p>
+
+  <p>
+    Whether you are here to strengthen your understanding of school subjects
+    or simply enjoy a good story, your journey begins here.
+  </p>
 </section>
 
 <div class="container">
 
-  <div class="book">
-    <div class="cover">
-    <img src="book-cover.png" alt="Biology Year 1 - Section 4: Organisms">
-    </div>
-    <h2>Organisms</h2>
+  <div id="home" class="book">
+    <h2>What would you like to explore?</h2>
 
-    <p>
-      <strong>Diversity of Living Things and Their Environment</strong>
-    </p>
-
-    <p>
-      A digital Biology learning resource for students and learners.
-    </p>
-
-    <p class="price">GH¢30</p>
-
-    <label>Email address</label>
-
-    <input
-      id="email"
-      type="email"
-      placeholder="Enter your email"
-    >
-
-    <button onclick="buyBook()">
-      Buy Now — GH¢30
+    <button onclick="showPage('learning')">
+      📘 LEARNING MATERIALS
     </button>
 
-    <p id="message"></p>
+    <button onclick="showPage('stories')">
+      📖 STORIES
+    </button>
 
+    <p style="text-align:center; margin-top:30px;">
+      <strong>“A book may open a door, but knowledge gives you the key.”</strong>
+    </p>
+  </div>
+
+
+  <div id="learning" class="book" style="display:none;">
+    <h2>📘 Learning Materials</h2>
+
+    <p>Choose a subject to explore its books.</p>
+
+    <button onclick="showPage('biology')">🧬 Biology</button>
+    <button onclick="showPage('chemistry')">⚗️ Chemistry</button>
+    <button onclick="showPage('physics')">⚡ Physics</button>
+    <button onclick="showPage('social-studies')">🌍 Social Studies</button>
+    <button onclick="showPage('mathematics')">➗ Mathematics</button>
+    <button onclick="showPage('integrated-science')">🔬 Integrated Science</button>
+    <button onclick="showPage('agriculture')">🌾 Agriculture</button>
+
+    <button onclick="showPage('home')">← Back</button>
+  </div>
+
+
+  <div id="biology" class="book" style="display:none;">
+    <h2>🧬 Biology Books</h2>
+
+    <div class="book">
+      <div class="cover">
+        <img src="book-cover.png" alt="Organisms Biology Book">
+      </div>
+
+      <h2>Organisms</h2>
+
+      <p>
+        <strong>Diversity of Living Things</strong>
+      </p>
+
+      <p>
+        A digital Biology learning resource designed to make the study
+        of organisms easier to understand.
+      </p>
+
+      <p class="price">GH₵30</p>
+
+      <label>Email address</label>
+
+      <input
+        id="email"
+        type="email"
+        placeholder="Enter your email"
+      >
+
+      <button onclick="buyBook()">
+        Buy Now – GH₵30
+      </button>
+
+      <p id="message"></p>
+    </div>
+
+    <button onclick="showPage('learning')">← Back to Subjects</button>
+  </div>
+
+
+  <div id="chemistry" class="book" style="display:none;">
+    <h2>⚗️ Chemistry</h2>
+    <p>Books will be added here.</p>
+    <button onclick="showPage('learning')">← Back to Subjects</button>
+  </div>
+
+
+  <div id="physics" class="book" style="display:none;">
+    <h2>⚡ Physics</h2>
+    <p>Books will be added here.</p>
+    <button onclick="showPage('learning')">← Back to Subjects</button>
+  </div>
+
+
+  <div id="social-studies" class="book" style="display:none;">
+    <h2>🌍 Social Studies</h2>
+    <p>Books will be added here.</p>
+    <button onclick="showPage('learning')">← Back to Subjects</button>
+  </div>
+
+
+  <div id="mathematics" class="book" style="display:none;">
+    <h2>➗ Mathematics</h2>
+    <p>Books will be added here.</p>
+    <button onclick="showPage('learning')">← Back to Subjects</button>
+  </div>
+
+
+  <div id="integrated-science" class="book" style="display:none;">
+    <h2>🔬 Integrated Science</h2>
+    <p>Books will be added here.</p>
+    <button onclick="showPage('learning')">← Back to Subjects</button>
+  </div>
+
+
+  <div id="agriculture" class="book" style="display:none;">
+    <h2>🌾 Agriculture</h2>
+    <p>Books will be added here.</p>
+    <button onclick="showPage('learning')">← Back to Subjects</button>
+  </div>
+
+
+  <div id="stories" class="book" style="display:none;">
+    <h2>📖 Stories</h2>
+
+    <p>Choose a story to begin your journey.</p>
+
+    <button onclick="showPage('story1')">
+      📖 The Boy Who Sold His Shadow
+    </button>
+
+    <button onclick="showPage('story2')">
+      📖 The Stranger at Midnight
+    </button>
+
+    <button onclick="showPage('story3')">
+      📖 The Empty Throne
+    </button>
+
+    <button onclick="showPage('story4')">
+      📖 When the Drum Went Silent
+    </button>
+
+    <button onclick="showPage('home')">← Back</button>
+  </div>
+
+
+  <div id="story1" class="book" style="display:none;">
+    <h2>The Boy Who Sold His Shadow</h2>
+    <p>
+      A story of ambition, temptation, wisdom and the consequences of
+      the choices we make.
+    </p>
+
+    <p><strong>Coming soon...</strong></p>
+
+    <button onclick="showPage('stories')">← Back to Stories</button>
+  </div>
+
+
+  <div id="story2" class="book" style="display:none;">
+    <h2>The Stranger at Midnight</h2>
+    <p>
+      A mysterious visitor arrives in a quiet community and changes
+      everything.
+    </p>
+
+    <p><strong>Coming soon...</strong></p>
+
+    <button onclick="showPage('stories')">← Back to Stories</button>
+  </div>
+
+
+  <div id="story3" class="book" style="display:none;">
+    <h2>The Empty Throne</h2>
+    <p>
+      A tale of leadership, loyalty, betrayal and the true meaning
+      of responsibility.
+    </p>
+
+    <p><strong>Coming soon...</strong></p>
+
+    <button onclick="showPage('stories')">← Back to Stories</button>
+  </div>
+
+
+  <div id="story4" class="book" style="display:none;">
+    <h2>When the Drum Went Silent</h2>
+    <p>
+      A story of tradition, courage, family and the wisdom passed
+      from one generation to another.
+    </p>
+
+    <p><strong>Coming soon...</strong></p>
+
+    <button onclick="showPage('stories')">← Back to Stories</button>
   </div>
 
 </div>
+
+<script>
+function showPage(pageId) {
+  const pages = document.querySelectorAll('.container > .book');
+
+  pages.forEach(function(page) {
+    page.style.display = 'none';
+  });
+
+  document.getElementById(pageId).style.display = 'block';
+
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+}
+  </script>
 
 <script>
 async function buyBook() {

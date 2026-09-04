@@ -68,30 +68,39 @@
 
     .story-product {
       display: grid;
-      grid-template-columns: minmax(200px, 330px) 1fr;
-      gap: 30px;
-      align-items: center;
-    }
+.story-product {
+  display: grid;
+  grid-template-columns: minmax(200px, 330px) 1fr;
+  gap: 35px;
+  align-items: start;
+  padding: 30px;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 10px 35px rgba(0,0,0,0.10);
+  border: 1px solid #e4eee9;
+}
 
-    .story-cover {
-      width: 100%;
-      max-width: 330px;
-      display: block;
-      margin: auto;
-      border-radius: 10px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.18);
-    }
+.story-cover {
+  width: 100%;
+  max-width: 330px;
+  display: block;
+  margin: auto;
+  border-radius: 14px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.20);
+}
 
-    .book-info h3 {
-      font-size: 30px;
-      margin-top: 0;
-      color: #0b5d45;
-    }
+.book-info h3 {
+  font-size: 30px;
+  line-height: 1.2;
+  margin: 8px 0 20px;
+  color: #0b5d45;
+}
 
-    .book-info p {
-      line-height: 1.7;
-    }
-
+.book-info p {
+  line-height: 1.7;
+  color: #29443c;
+}
+      
     .price {
       font-size: 30px;
       font-weight: bold;

@@ -53,8 +53,8 @@
     <h1>Payment Successful 🎉</h1>
 
     <p>
-      Thank you for purchasing <strong>Organisms</strong>
-      from SmartBio Books.
+      Thank you for purchasing from
+      <strong>SmartBio Books</strong>.
     </p>
 
     <p>
@@ -66,7 +66,7 @@
       class="download"
       href="#"
     >
-      Download Organisms PDF
+      Download Your Book
     </a>
 
     <p id="message"></p>
@@ -75,9 +75,11 @@
 
   <script>
 
-    const params = new URLSearchParams(window.location.search);
+    const params =
+      new URLSearchParams(window.location.search);
 
-    const reference = params.get("reference");
+    const reference =
+      params.get("reference");
 
     const downloadButton =
       document.getElementById("download");

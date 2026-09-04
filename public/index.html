@@ -44,13 +44,14 @@
       padding: 30px;
       border-radius: 18px;
       box-shadow: 0 8px 30px #0001;
+      margin-bottom: 25px;
     }
 
-    .cover img {
-    width: 80%;
-    height: 80%;
-    object-fit: contain;
-    display: block;
+    .book-card {
+      background: #f5f8f6;
+      padding: 20px;
+      border-radius: 12px;
+      margin: 20px 0;
     }
 
     .price {
@@ -78,16 +79,23 @@
       font-size: 16px;
       font-weight: bold;
       cursor: pointer;
+      margin-top: 8px;
+    }
+
+    button:hover {
+      opacity: 0.9;
     }
 
     #message {
       margin-top: 15px;
+      font-weight: bold;
     }
   </style>
 </head>
-  
+
 <body>
-  <header>
+
+<header>
   📚 SmartBio Books
 </header>
 
@@ -108,9 +116,8 @@
 
 <div class="container">
 
-<div id="home" class="page">
-
-  <section style="margin: 30px 0;">
+  <!-- HOME -->
+  <div id="home" class="book">
 
     <div style="
       background: white;
@@ -120,6 +127,7 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.08);
     ">
       <h2>📘 Learning Materials</h2>
+
       <p>
         Explore educational materials carefully organized by school subject.
         Find books and resources to strengthen your understanding and improve
@@ -139,6 +147,7 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.08);
     ">
       <h2>📖 Stories</h2>
+
       <p>
         Discover engaging stories filled with adventure, mystery, wisdom,
         African folklore, life lessons, proverbs, idioms, and memorable
@@ -150,242 +159,324 @@
       </button>
     </div>
 
-  </section>
+  </div>
 
-</div>
 
-<div id="learning" class="book" style="display:none;">
+  <!-- LEARNING MATERIALS -->
+  <div id="learning" class="book" style="display:none;">
+
     <h2>📘 Learning Materials</h2>
 
     <p>Choose a subject to explore its books.</p>
 
     <div class="book-card">
-        <h3>🧬 Biology</h3>
-        <p>Explore Biology books and learning materials.</p>
-        <button onclick="showPage('biology')">View Biology Books</button>
+      <h3>🧬 Biology</h3>
+      <p>Explore Biology books and learning materials.</p>
+      <button onclick="showPage('biology')">
+        View Biology Books
+      </button>
     </div>
 
     <div class="book-card">
-        <h3>⚗️ Chemistry</h3>
-        <p>Explore Chemistry books and learning materials.</p>
-        <button onclick="showPage('chemistry')">View Chemistry Books</button>
+      <h3>⚗️ Chemistry</h3>
+      <p>Explore Chemistry books and learning materials.</p>
+      <button onclick="showPage('chemistry')">
+        View Chemistry Books
+      </button>
     </div>
 
     <div class="book-card">
-        <h3>⚡ Physics</h3>
-        <p>Explore Physics books and learning materials.</p>
-        <button onclick="showPage('physics')">View Physics Books</button>
+      <h3>⚡ Physics</h3>
+      <p>Explore Physics books and learning materials.</p>
+      <button onclick="showPage('physics')">
+        View Physics Books
+      </button>
     </div>
 
     <div class="book-card">
-        <h3>🌍 Social Studies</h3>
-        <p>Explore Social Studies books and learning materials.</p>
-        <button onclick="showPage('social-studies')">View Social Studies Books</button>
+      <h3>🌍 Social Studies</h3>
+      <p>Explore Social Studies books and learning materials.</p>
+      <button onclick="showPage('social-studies')">
+        View Social Studies Books
+      </button>
     </div>
 
     <div class="book-card">
-        <h3>➗ Mathematics</h3>
-        <p>Explore Mathematics books and learning materials.</p>
-        <button onclick="showPage('mathematics')">View Mathematics Books</button>
+      <h3>➗ Mathematics</h3>
+      <p>Explore Mathematics books and learning materials.</p>
+      <button onclick="showPage('mathematics')">
+        View Mathematics Books
+      </button>
     </div>
 
     <div class="book-card">
-        <h3>🔬 Integrated Science</h3>
-        <p>Explore Integrated Science books and learning materials.</p>
-        <button onclick="showPage('integrated-science')">View Integrated Science Books</button>
+      <h3>🔬 Integrated Science</h3>
+      <p>Explore Integrated Science books and learning materials.</p>
+      <button onclick="showPage('integrated-science')">
+        View Integrated Science Books
+      </button>
     </div>
 
     <div class="book-card">
-        <h3>🌾 Agriculture</h3>
-        <p>Explore Agriculture books and learning materials.</p>
-        <button onclick="showPage('agriculture')">View Agriculture Books</button>
+      <h3>🌾 Agriculture</h3>
+      <p>Explore Agriculture books and learning materials.</p>
+      <button onclick="showPage('agriculture')">
+        View Agriculture Books
+      </button>
     </div>
 
-    <button onclick="showPage('home')">← Back</button>
-</div>
+    <button onclick="showPage('home')">
+      ← Back
+    </button>
 
+  </div>
+
+
+  <!-- BIOLOGY -->
   <div id="biology" class="book" style="display:none;">
-    <h2>🧬 Biology Books</h2>
 
-    <div class="book">
-      <div class="cover">
-        <img src="book-cover.png" alt="Organisms Biology Book">
-      </div>
+    <h2>🧬 Biology</h2>
 
-      <h2>Organisms</h2>
+    <div class="book-card">
+
+      <h3>📘 Organisms</h3>
 
       <p>
-        <strong>Diversity of Living Things</strong>
+        Explore this Biology learning material.
       </p>
 
-      <p>
-        A digital Biology learning resource designed to make the study
-        of organisms easier to understand.
+      <p class="price">
+        GH¢30
       </p>
-
-      <p class="price">GH₵30</p>
-
-      <label>Email address</label>
 
       <input
-        id="email"
         type="email"
+        id="organismsEmail"
         placeholder="Enter your email"
       >
 
-      <button onclick="buyBook()">
-        Buy Now – GH₵30
+      <button onclick="buyBook('organisms')">
+        💳 Buy Organisms — GH¢30
       </button>
 
-      <p id="message"></p>
+      <p id="organismsMessage"></p>
+
     </div>
 
-    <button onclick="showPage('learning')">← Back to Subjects</button>
+    <button onclick="showPage('learning')">
+      ← Back to Learning Materials
+    </button>
+
   </div>
 
 
+  <!-- CHEMISTRY -->
   <div id="chemistry" class="book" style="display:none;">
+
     <h2>⚗️ Chemistry</h2>
-    <p>Books will be added here.</p>
-    <button onclick="showPage('learning')">← Back to Subjects</button>
+
+    <p><strong>Coming soon...</strong></p>
+
+    <button onclick="showPage('learning')">
+      ← Back
+    </button>
+
   </div>
 
 
+  <!-- PHYSICS -->
   <div id="physics" class="book" style="display:none;">
+
     <h2>⚡ Physics</h2>
-    <p>Books will be added here.</p>
-    <button onclick="showPage('learning')">← Back to Subjects</button>
+
+    <p><strong>Coming soon...</strong></p>
+
+    <button onclick="showPage('learning')">
+      ← Back
+    </button>
+
   </div>
 
 
+  <!-- SOCIAL STUDIES -->
   <div id="social-studies" class="book" style="display:none;">
+
     <h2>🌍 Social Studies</h2>
-    <p>Books will be added here.</p>
-    <button onclick="showPage('learning')">← Back to Subjects</button>
+
+    <p><strong>Coming soon...</strong></p>
+
+    <button onclick="showPage('learning')">
+      ← Back
+    </button>
+
   </div>
 
 
+  <!-- MATHEMATICS -->
   <div id="mathematics" class="book" style="display:none;">
+
     <h2>➗ Mathematics</h2>
-    <p>Books will be added here.</p>
-    <button onclick="showPage('learning')">← Back to Subjects</button>
+
+    <p><strong>Coming soon...</strong></p>
+
+    <button onclick="showPage('learning')">
+      ← Back
+    </button>
+
   </div>
 
 
+  <!-- INTEGRATED SCIENCE -->
   <div id="integrated-science" class="book" style="display:none;">
+
     <h2>🔬 Integrated Science</h2>
-    <p>Books will be added here.</p>
-    <button onclick="showPage('learning')">← Back to Subjects</button>
+
+    <p><strong>Coming soon...</strong></p>
+
+    <button onclick="showPage('learning')">
+      ← Back
+    </button>
+
   </div>
 
 
+  <!-- AGRICULTURE -->
   <div id="agriculture" class="book" style="display:none;">
+
     <h2>🌾 Agriculture</h2>
-    <p>Books will be added here.</p>
-    <button onclick="showPage('learning')">← Back to Subjects</button>
+
+    <p><strong>Coming soon...</strong></p>
+
+    <button onclick="showPage('learning')">
+      ← Back
+    </button>
+
   </div>
 
 
+  <!-- STORIES -->
   <div id="stories" class="book" style="display:none;">
+
     <h2>📖 Stories</h2>
 
-    <p>Choose a story to begin your journey.</p>
+    <div class="book-card">
 
-    <button onclick="showPage('story1')">
-      📖 The Boy Who Sold His Shadow
+      <h3>📕 The Boy Who Sold His Shadow</h3>
+
+      <p>
+        A powerful story about ambition, temptation, choices,
+        and the true meaning of success.
+      </p>
+
+      <p class="price">
+        GH¢20
+      </p>
+
+      <input
+        type="email"
+        id="shadowEmail"
+        placeholder="Enter your email"
+      >
+
+      <button onclick="buyBook('shadow')">
+        💳 Buy The Boy Who Sold His Shadow — GH¢20
+      </button>
+
+      <p id="shadowMessage"></p>
+
+    </div>
+
+
+    <div class="book-card">
+
+      <h3>The Stranger at Midnight</h3>
+
+      <p>
+        A mysterious visitor arrives in a quiet community and changes
+        everything.
+      </p>
+
+      <p><strong>Coming soon...</strong></p>
+
+    </div>
+
+
+    <div class="book-card">
+
+      <h3>The Empty Throne</h3>
+
+      <p>
+        A tale of leadership, loyalty, betrayal and the true meaning
+        of responsibility.
+      </p>
+
+      <p><strong>Coming soon...</strong></p>
+
+    </div>
+
+
+    <div class="book-card">
+
+      <h3>When the Drum Went Silent</h3>
+
+      <p>
+        A story of tradition, courage, family and the wisdom passed
+        from one generation to another.
+      </p>
+
+      <p><strong>Coming soon...</strong></p>
+
+    </div>
+
+
+    <button onclick="showPage('home')">
+      ← Back Home
     </button>
 
-    <button onclick="showPage('story2')">
-      📖 The Stranger at Midnight
-    </button>
-
-    <button onclick="showPage('story3')">
-      📖 The Empty Throne
-    </button>
-
-    <button onclick="showPage('story4')">
-      📖 When the Drum Went Silent
-    </button>
-
-    <button onclick="showPage('home')">← Back</button>
-  </div>
-
-
-  <div id="story1" class="book" style="display:none;">
-    <h2>The Boy Who Sold His Shadow</h2>
-    <p>
-      A story of ambition, temptation, wisdom and the consequences of
-      the choices we make.
-    </p>
-
-    <p><strong>Coming soon...</strong></p>
-
-    <button onclick="showPage('stories')">← Back to Stories</button>
-  </div>
-
-
-  <div id="story2" class="book" style="display:none;">
-    <h2>The Stranger at Midnight</h2>
-    <p>
-      A mysterious visitor arrives in a quiet community and changes
-      everything.
-    </p>
-
-    <p><strong>Coming soon...</strong></p>
-
-    <button onclick="showPage('stories')">← Back to Stories</button>
-  </div>
-
-
-  <div id="story3" class="book" style="display:none;">
-    <h2>The Empty Throne</h2>
-    <p>
-      A tale of leadership, loyalty, betrayal and the true meaning
-      of responsibility.
-    </p>
-
-    <p><strong>Coming soon...</strong></p>
-
-    <button onclick="showPage('stories')">← Back to Stories</button>
-  </div>
-
-
-  <div id="story4" class="book" style="display:none;">
-    <h2>When the Drum Went Silent</h2>
-    <p>
-      A story of tradition, courage, family and the wisdom passed
-      from one generation to another.
-    </p>
-
-    <p><strong>Coming soon...</strong></p>
-
-    <button onclick="showPage('stories')">← Back to Stories</button>
   </div>
 
 </div>
 
+
 <script>
+
 function showPage(pageId) {
+
   const pages = document.querySelectorAll('.container > .book');
 
   pages.forEach(function(page) {
     page.style.display = 'none';
   });
 
-  document.getElementById(pageId).style.display = 'block';
+  const selectedPage = document.getElementById(pageId);
+
+  if (selectedPage) {
+    selectedPage.style.display = 'block';
+  }
 
   window.scrollTo({
     top: 0,
     behavior: 'smooth'
   });
 }
-  </script>
 
-<script>
-async function buyBook() {
 
-  const email = document.getElementById("email").value;
-  const message = document.getElementById("message");
+async function buyBook(bookId) {
+
+  let emailInput;
+  let message;
+
+  if (bookId === "organisms") {
+    emailInput = document.getElementById("organismsEmail");
+    message = document.getElementById("organismsMessage");
+  }
+
+  if (bookId === "shadow") {
+    emailInput = document.getElementById("shadowEmail");
+    message = document.getElementById("shadowMessage");
+  }
+
+  const email = emailInput.value.trim();
 
   if (!email) {
     message.textContent = "Please enter your email.";
@@ -397,6 +488,7 @@ async function buyBook() {
   try {
 
     const response = await fetch("/api/initialize", {
+
       method: "POST",
 
       headers: {
@@ -404,14 +496,18 @@ async function buyBook() {
       },
 
       body: JSON.stringify({
-        email: email
+        email: email,
+        bookId: bookId
       })
+
     });
 
     const data = await response.json();
 
     if (!response.ok) {
-      throw new Error(data.error || "Payment could not start.");
+      throw new Error(
+        data.error || "Payment could not start."
+      );
     }
 
     window.location.href = data.authorization_url;
@@ -421,7 +517,9 @@ async function buyBook() {
     message.textContent = error.message;
 
   }
+
 }
+
 </script>
 
 </body>

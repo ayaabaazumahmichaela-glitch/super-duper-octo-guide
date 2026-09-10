@@ -524,128 +524,123 @@
   </footer>
 
 
+<script>
 
-  <script>
+  function showPage(pageId) {
 
-    function showPage(pageId) {
-
-      document
-        .querySelectorAll('.container > .book')
-        .forEach(page => {
-          page.style.display = 'none';
-        });
-
-      const page =
-        document.getElementById(pageId);
-
-      if (page) {
-        page.style.display = 'block';
-      }
-
-      const hero =
-        document.querySelector('.hero');
-
-      if (hero) {
-        hero.style.display =
-          pageId === 'home'
-            ? 'block'
-            : 'none';
-      }
-
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
+    document
+      .querySelectorAll('.container > .book')
+      .forEach(page => {
+        page.style.display = 'none';
       });
+
+    const page =
+      document.getElementById(pageId);
+
+    if (page) {
+      page.style.display = 'block';
     }
 
+    const hero =
+      document.querySelector('.hero');
+
+    if (hero) {
+      hero.style.display =
+        pageId === 'home'
+          ? 'block'
+          : 'none';
+    }
+
+  }
 
 
-    async function buyBook(bookId) {
+  async function buyBook(bookId) {
 
-      const emailInput =
-        document.getElementById('shadowEmail');
+    const emailInput =
+      document.getElementById('shadowEmail');
 
-      const message =
-        document.getElementById('shadowMessage');
+    const message =
+      document.getElementById('shadowMessage');
 
-      const email =
-        emailInput.value.trim();
-
-
-      if (!email) {
-
-        message.textContent =
-          'Please enter your email address.';
-
-        return;
-      }
+    const email =
+      emailInput.value.trim();
 
 
-      if (!email.includes('@')) {
-
-        message.textContent =
-          'Please enter a valid email address.';
-
-        return;
-      }
-
+    if (!email) {
 
       message.textContent =
-        'Starting payment...';
+        'Please enter your email address.';
+
+      return;
+    }
 
 
-      try {
+    if (!email.includes('@')) {
 
-        const response =
-          await fetch('/api/initialize', {
+      message.textContent =
+        'Please enter a valid email address.';
 
-            method: 'POST',
-
-            headers: {
-              'Content-Type': 'application/json'
-            },
-
-            body: JSON.stringify({
-              email: email,
-              bookId: bookId
-            })
-
-          });
+      return;
+    }
 
 
-        const data =
-          await response.json();
+    message.textContent =
+      'Starting payment...';
 
 
-        if (
-          !response.ok ||
-          !data.authorization_url
-        ) {
+    try {
 
-          message.textContent =
-            data.error ||
-            'Payment could not be started.';
+      const response =
+        await fetch('/api/initialize', {
 
-          return;
-        }
+          method: 'POST',
+
+          headers: {
+            'Content-Type': 'application/json'
+          },
+
+          body: JSON.stringify({
+            email: email,
+            bookId: bookId
+          })
+
+        });
 
 
-        window.location.href =
-          data.authorization_url;
+      const data =
+        await response.json();
 
 
-      } catch (error) {
-
-        console.error(error);
+      if (
+        !response.ok ||
+        !data.authorization_url
+      ) {
 
         message.textContent =
-          'Something went wrong. Please try again.';
+          data.error ||
+          'Payment could not be started.';
 
+        return;
       }
+
+
+      window.location.href =
+        data.authorization_url;
+
+
+    } catch (error) {
+
+      console.error(error);
+
+      message.textContent =
+        'Something went wrong. Please try again.';
 
     }
 
-  </script>
+  }
+
+    </script>
+
 
 </body>
         </html>

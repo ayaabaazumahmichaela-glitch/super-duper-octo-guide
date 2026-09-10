@@ -436,26 +436,24 @@ header img {
 
 
 <script>
+  function showPage(pageId) {
 
-function showPage(pageId) {
-
-  const pages =
-    document.querySelectorAll('.container > .book');
-
-  pages.forEach(function(page) {
+  document.querySelectorAll('.container > .book').forEach(page => {
     page.style.display = 'none';
   });
 
-  const selectedPage =
-    document.getElementById(pageId);
+  const page = document.getElementById(pageId);
 
-  if (selectedPage) {
-    selectedPage.style.display = 'block';
+  if (page) {
+    page.style.display = 'block';
   }
-  
-}
 
+  const hero = document.querySelector('.hero');
 
+  if (hero) {
+    hero.style.display = pageId === 'home' ? 'block' : 'none';
+  }
+  }
 async function buyBook(bookId) {
 
   let emailInput;

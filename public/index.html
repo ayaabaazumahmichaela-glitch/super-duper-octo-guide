@@ -359,37 +359,42 @@ header img {
 
 <div class="container">
 
-    <!-- HOME -->
-  <div id="home" class="book">
+<!-- HOME -->
+<div id="home" class="book">
 
-    <div class="home-card">
-      <h2>🏛️ History</h2>
+  <div class="home-card history-card">
 
-      <p>
-        Explore the history of our world — from ancient civilizations,
-        kingdoms and empires to legendary leaders, important discoveries
-        and events that changed the course of history.
-      </p>
+    <h2>🏛️ History</h2>
 
-      <button onclick="showPage('history')">
-        🏛️ History
-      </button>
-    </div>
+    <p>
+      Explore the history of our world — from ancient civilizations,
+      kingdoms and empires to legendary leaders, important discoveries
+      and events that changed the course of history.
+    </p>
 
-    <div class="home-card">
-      <h2>📖 Stories</h2>
-
-      <p>
-        Discover engaging stories filled with adventure, mystery, wisdom,
-        culture, life lessons, proverbs, idioms, and memorable characters.
-      </p>
-
-      <button onclick="showPage('stories')">
-        📖 Stories
-      </button>
-    </div>
+    <button class="history-button" onclick="showPage('history')">
+      🏛️ Explore History
+    </button>
 
   </div>
+
+
+  <div class="home-card stories-card">
+
+    <h2>📖 Stories</h2>
+
+    <p>
+      Discover engaging stories filled with adventure, mystery, wisdom,
+      culture, life lessons, proverbs, idioms, and memorable characters.
+    </p>
+
+    <button class="stories-button" onclick="showPage('stories')">
+      📖 Explore Stories
+    </button>
+
+  </div>
+
+</div>
 
 <!-- HISTORY -->
 <div id="history" class="book" style="display:none;">

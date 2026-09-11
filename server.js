@@ -13,7 +13,7 @@ console.log(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Serve the website files
+// Serve website files
 app.use(express.static(path.join(__dirname, "public")));
 
 // Homepage
@@ -21,19 +21,12 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
-// =====================================================
-// SMARTBIO BOOKS
-// Book prices are stored safely on the server.
-// =====================================================
+
+// ============================================================
+// BOOKS
+// ============================================================
 
 const BOOKS = {
-  organisms: {
-    name: "Organisms",
-    amount: 3000,
-    price: "GH¢30",
-    file: "Biology_Section_4_New_Cover.pdf",
-    downloadName: "SmartBio-Books-Organisms.pdf"
-  },
 
   shadow: {
     name: "The Boy Who Sold His Shadow",
@@ -41,15 +34,27 @@ const BOOKS = {
     price: "GH¢20",
     file: "The_Boy_Who_Sold_His_Shadow_Illustrated.pdf",
     downloadName: "The_Boy_Who_Sold_His_Shadow_Illustrated.pdf"
+  },
+
+  village: {
+    name: "The Village That Forgot Its Name",
+    amount: 2000,
+    price: "GH¢20",
+    file: "the_village_that_forgot_its_name.pdf",
+    downloadName: "the_village_that_forgot_its_name.pdf"
   }
+
 };
 
-// =====================================================
-// START PAYSTACK PAYMENT
-// =====================================================
+
+// ============================================================
+// INITIALIZE PAYSTACK PAYMENT
+// ============================================================
 
 app.post("/api/initialize", async (req, res) => {
+
   try {
+
     if (!SECRET_KEY) {
       return res.status(500).json({
         error: "Payment system is not configured."
@@ -84,9 +89,7 @@ app.post("/api/initialize", async (req, res) => {
 
         body: JSON.stringify({
           email: email,
-
           amount: book.amount,
-
           currency: "GHS",
 
           metadata: {
@@ -105,29 +108,38 @@ app.post("/api/initialize", async (req, res) => {
 
     if (!data.status) {
       return res.status(400).json({
-        error: data.message || "Payment could not be started."
+        error:
+          data.message ||
+          "Payment could not be started."
       });
     }
 
     res.json({
-      authorization_url: data.data.authorization_url
+      authorization_url:
+        data.data.authorization_url
     });
 
   } catch (error) {
+
     console.error(error);
 
     res.status(500).json({
       error: "Something went wrong."
     });
+
   }
+
 });
 
-// =====================================================
-// VERIFY PAYMENT AND DOWNLOAD THE CORRECT BOOK
-// =====================================================
+
+// ============================================================
+// VERIFY PAYMENT AND DOWNLOAD BOOK
+// ============================================================
 
 app.get("/api/download", async (req, res) => {
+
   try {
+
     if (!SECRET_KEY) {
       return res.status(500).send(
         "Payment system is not configured."
@@ -170,11 +182,10 @@ app.get("/api/download", async (req, res) => {
       );
     }
 
-    // Get the book that was purchased
     let metadata = transaction.metadata;
 
-    // Paystack may return metadata as an object or JSON text
     if (typeof metadata === "string") {
+
       try {
         metadata = JSON.parse(metadata);
       } catch (error) {
@@ -182,10 +193,14 @@ app.get("/api/download", async (req, res) => {
           "Invalid payment information."
         );
       }
+
     }
 
-    const bookId = metadata && metadata.bookId;
-    const book = BOOKS[bookId];
+    const bookId =
+      metadata && metadata.bookId;
+
+    const book =
+      BOOKS[bookId];
 
     if (!book) {
       return res.status(403).send(
@@ -193,39 +208,47 @@ app.get("/api/download", async (req, res) => {
       );
     }
 
-    // Make sure the amount paid matches the selected book
-    if (transaction.amount !== book.amount) {
+    if (
+      transaction.amount !== book.amount
+    ) {
       return res.status(403).send(
         "Payment amount could not be verified."
       );
     }
 
-    // Send the correct PDF
     res.download(
       path.join(__dirname, book.file),
       book.downloadName,
       (error) => {
+
         if (error) {
           console.error(error);
         }
+
       }
     );
 
   } catch (error) {
+
     console.error(error);
 
     res.status(500).send(
       "Download verification failed."
     );
+
   }
+
 });
 
-// =====================================================
+
+// ============================================================
 // START SERVER
-// =====================================================
+// ============================================================
 
 app.listen(PORT, () => {
+
   console.log(
-    `SmartBio Books running on port ${PORT}`
+    `His-Story Books running on port ${PORT}`
   );
+
 });

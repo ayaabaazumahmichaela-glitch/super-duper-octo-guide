@@ -1,5 +1,6 @@
 const express = require("express");
 const path = require("path");
+const fs = require("fs");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -42,6 +43,14 @@ const BOOKS = {
     price: "GH¢20",
     file: "The_Village_That_Forgot_Its_Name_FINAL.pdf",
     downloadName: "The_Village_That_Forgot_Its_Name_FINAL.pdf"
+  },
+
+  nkrumah: {
+    name: "THE HISTORY OF OSAGYEFO DR. KWAME NKRUMAH",
+    amount: 2500,
+    price: "GH¢25",
+    file: "the_history_of_osagyefo_dr_kwame_nkrumah.pdf",
+    downloadName: "the_history_of_osagyefo_dr_kwame_nkrumah.pdf"
   }
 };
 
@@ -103,7 +112,10 @@ app.post("/api/initialize", async (req, res) => {
     const data = await response.json();
 
     if (!data.status || !data.data) {
-      console.error("Paystack initialization error:", data);
+      console.error(
+        "Paystack initialization error:",
+        data
+      );
 
       return res.status(400).json({
         error:
@@ -124,7 +136,8 @@ app.post("/api/initialize", async (req, res) => {
     );
 
     return res.status(500).json({
-      error: "Something went wrong while starting payment."
+      error:
+        "Something went wrong while starting payment."
     });
   }
 });
@@ -177,7 +190,8 @@ app.get("/api/download", async (req, res) => {
           method: "GET",
 
           headers: {
-            Authorization: `Bearer ${SECRET_KEY}`
+            Authorization:
+              `Bearer ${SECRET_KEY}`
           },
 
           signal: controller.signal
@@ -194,7 +208,11 @@ app.get("/api/download", async (req, res) => {
       JSON.stringify(data)
     );
 
-    if (!response.ok || !data.status || !data.data) {
+    if (
+      !response.ok ||
+      !data.status ||
+      !data.data
+    ) {
       return res.status(403).send(
         "Payment could not be verified."
       );
@@ -293,10 +311,8 @@ app.get("/api/download", async (req, res) => {
     );
 
     // --------------------------------------------------------
-    // Check that PDF exists
+    // Check PDF exists
     // --------------------------------------------------------
-
-    const fs = require("fs");
 
     if (!fs.existsSync(filePath)) {
       console.error(

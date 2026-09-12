@@ -476,9 +476,7 @@
     © His-Story — Stories that remember. History that lives.
 </footer>
 
-
 <script>
-
 function showPage(pageId) {
 
     const pages = document.querySelectorAll('.page');
@@ -500,108 +498,7 @@ function showPage(pageId) {
     } else {
         hero.style.display = 'none';
     }
-
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-    });
 }
-
-
-async function buyBook(bookId) {
-
-    let emailInput;
-    let message;
-
-    if (bookId === 'shadow') {
-
-        emailInput = document.getElementById('shadowEmail');
-        message = document.getElementById('shadowMessage');
-
-    } else if (bookId === 'village') {
-
-        emailInput = document.getElementById('villageEmail');
-        message = document.getElementById('villageMessage');
-
-    } else if (bookId === 'nkrumah') {
-
-        emailInput = document.getElementById('nkrumahEmail');
-        message = document.getElementById('nkrumahMessage');
-
-    } else {
-
-        return;
-    }
-
-
-    const email = emailInput.value.trim();
-
-
-    if (!email) {
-
-        message.textContent =
-            'Please enter your email address.';
-
-        return;
-    }
-
-
-    if (!email.includes('@')) {
-
-        message.textContent =
-            'Please enter a valid email address.';
-
-        return;
-    }
-
-
-    message.textContent =
-        'Connecting to payment...';
-
-
-    try {
-
-        const response = await fetch(
-            '/api/initialize',
-            {
-                method: 'POST',
-
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-
-                body: JSON.stringify({
-                    email: email,
-                    bookId: bookId
-                })
-            }
-        );
-
-
-        const data = await response.json();
-
-
-        if (data.authorization_url) {
-
-            window.location.href =
-                data.authorization_url;
-
-        } else {
-
-            message.textContent =
-                data.message ||
-                'Payment could not be initialized.';
-        }
-
-    } catch (error) {
-
-        console.error(error);
-
-        message.textContent =
-            'Something went wrong. Please try again.';
-    }
-}
-
 </script>
 
 </body>

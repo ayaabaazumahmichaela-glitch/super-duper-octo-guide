@@ -7,6 +7,7 @@
 <title>His-Story</title>
 
 <style>
+
 * {
     box-sizing: border-box;
 }
@@ -199,6 +200,7 @@ footer {
 }
 
 @media (max-width: 600px) {
+
     header h1 {
         font-size: 25px;
     }
@@ -214,102 +216,242 @@ footer {
     .cover {
         height: 280px;
     }
+
 }
+
 </style>
 </head>
 
 <body>
 
 <header>
-    <img src="his-story-logo.png" alt="His-Story Logo" class="logo">
+
+    <img
+        src="his-story-logo.png"
+        alt="His-Story Logo"
+        class="logo"
+    >
+
     <h1>His-Story</h1>
-    <p>Stories that remember. History that lives.</p>
+
+    <p>
+        Stories that remember. History that lives.
+    </p>
+
 </header>
 
+
 <nav>
-    <button onclick="showPage('home')">Home</button>
-    <button onclick="showPage('history')">History</button>
-    <button onclick="showPage('stories')">Stories</button>
+
+    <button onclick="showPage('home')">
+        Home
+    </button>
+
+    <button onclick="showPage('history')">
+        History
+    </button>
+
+    <button onclick="showPage('stories')">
+        Stories
+    </button>
+
 </nav>
 
+
 <section class="hero" id="hero">
-    <h2>Welcome to His-Story</h2>
+
+    <h2>
+        Welcome to His-Story
+    </h2>
+
     <p>
         Discover powerful stories and meaningful history through books
         created to educate, inspire and entertain.
     </p>
+
 </section>
+
 
 <div class="container">
 
+
     <!-- HOME -->
+
     <section class="book" id="home">
-        <h2 class="page-title">Explore His-Story</h2>
+
+        <h2 class="page-title">
+            Explore His-Story
+        </h2>
 
         <div class="category-grid">
 
-            <div class="category-card" onclick="showPage('history')">
-                <h3>📚 History</h3>
+
+            <div
+                class="category-card"
+                onclick="showPage('history')"
+            >
+
+                <h3>
+                    📚 History
+                </h3>
+
                 <p>
                     Explore important historical stories, people,
                     events and lessons from the past.
                 </p>
+
             </div>
 
-            <div class="category-card" onclick="showPage('stories')">
-                <h3>📖 Stories</h3>
+
+            <div
+                class="category-card"
+                onclick="showPage('stories')"
+            >
+
+                <h3>
+                    📖 Stories
+                </h3>
+
                 <p>
                     Discover exciting original stories filled with
                     adventure, mystery, wisdom and life lessons.
                 </p>
+
             </div>
 
+
         </div>
+
     </section>
+
 
 
     <!-- HISTORY -->
-    <section class="book" id="history" style="display:none;">
-        <h2 class="page-title">History Books</h2>
 
-        <div class="category-card">
-            <h3>History Books Coming Soon</h3>
-            <p>
-                Real history books will be added here.
-            </p>
-        </div>
+    <section
+        class="book"
+        id="history"
+        style="display:none;"
+    >
 
-        <button class="back-btn" onclick="showPage('home')">
-            Back to Home
-        </button>
-    </section>
+        <h2 class="page-title">
+            History Books
+        </h2>
 
-
-    <!-- STORIES -->
-    <section class="book" id="stories" style="display:none;">
-        <h2 class="page-title">Story Books</h2>
 
         <div class="story-grid">
 
-            <!-- THE BOY WHO SOLD HIS SHADOW -->
+
+            <!-- THE HISTORY OF OSAGYEFO DR. KWAME NKRUMAH -->
+
             <div class="story-product">
 
+
                 <div class="cover">
+
+                    <img
+                        src="the_history_of_osagyefo_dr_kwame_nkrumah_cover.png"
+                        alt="The History of Osagyefo Dr. Kwame Nkrumah Cover"
+                    >
+
+                </div>
+
+
+                <h3>
+                    THE HISTORY OF OSAGYEFO DR. KWAME NKRUMAH
+                </h3>
+
+
+                <div class="price">
+                    GH¢25
+                </div>
+
+
+                <input
+                    type="email"
+                    id="nkrumahEmail"
+                    placeholder="Enter your email"
+                >
+
+
+                <button
+                    class="buy-btn"
+                    onclick="buyBook('nkrumah')"
+                >
+                    Buy THE HISTORY OF OSAGYEFO DR. KWAME NKRUMAH — GH¢25
+                </button>
+
+
+                <div
+                    class="message"
+                    id="nkrumahMessage"
+                ></div>
+
+
+            </div>
+
+
+        </div>
+
+
+        <button
+            class="back-btn"
+            onclick="showPage('home')"
+        >
+            Back to Home
+        </button>
+
+    </section>
+
+
+
+    <!-- STORIES -->
+
+    <section
+        class="book"
+        id="stories"
+        style="display:none;"
+    >
+
+        <h2 class="page-title">
+            Story Books
+        </h2>
+
+
+        <div class="story-grid">
+
+
+            <!-- THE BOY WHO SOLD HIS SHADOW -->
+
+            <div class="story-product">
+
+
+                <div class="cover">
+
                     <img
                         src="the_boy_who_sold_his_shadow_cover.png"
                         alt="The Boy Who Sold His Shadow Cover"
                     >
+
                 </div>
 
-                <h3>The Boy Who Sold His Shadow</h3>
 
-                <div class="price">GH¢20</div>
+                <h3>
+                    The Boy Who Sold His Shadow
+                </h3>
+
+
+                <div class="price">
+                    GH¢20
+                </div>
+
 
                 <input
                     type="email"
                     id="shadowEmail"
                     placeholder="Enter your email"
                 >
+
 
                 <button
                     class="buy-btn"
@@ -318,33 +460,48 @@ footer {
                     Buy The Boy Who Sold His Shadow — GH¢20
                 </button>
 
+
                 <div
                     class="message"
                     id="shadowMessage"
                 ></div>
 
+
             </div>
 
 
+
             <!-- THE VILLAGE THAT FORGOT ITS NAME -->
+
             <div class="story-product">
 
+
                 <div class="cover">
+
                     <img
                         src="the_village_that_forgot_its_name_cover.png"
                         alt="The Village That Forgot Its Name Cover"
                     >
+
                 </div>
 
-                <h3>The Village That Forgot Its Name</h3>
 
-                <div class="price">GH¢20</div>
+                <h3>
+                    The Village That Forgot Its Name
+                </h3>
+
+
+                <div class="price">
+                    GH¢20
+                </div>
+
 
                 <input
                     type="email"
                     id="villageEmail"
                     placeholder="Enter your email"
                 >
+
 
                 <button
                     class="buy-btn"
@@ -353,140 +510,35 @@ footer {
                     Buy The Village That Forgot Its Name — GH¢20
                 </button>
 
+
                 <div
                     class="message"
                     id="villageMessage"
                 ></div>
 
+
             </div>
+
 
         </div>
 
-        <button class="back-btn" onclick="showPage('home')">
+
+        <button
+            class="back-btn"
+            onclick="showPage('home')"
+        >
             Back to Home
         </button>
+
     </section>
+
 
 </div>
 
+
+
 <footer>
+
     © His-Story — Stories that remember. History that lives.
-</footer>
 
-
-<script>
-
-function showPage(pageId) {
-
-    const pages = document.querySelectorAll('.container > .book');
-
-    pages.forEach(function(page) {
-        page.style.display = 'none';
-    });
-
-    const selectedPage = document.getElementById(pageId);
-
-    if (selectedPage) {
-        selectedPage.style.display = 'block';
-    }
-
-    const hero = document.getElementById('hero');
-
-    if (pageId === 'home') {
-        hero.style.display = 'block';
-    } else {
-        hero.style.display = 'none';
-    }
-}
-
-
-async function buyBook(bookId) {
-
-    let emailInput;
-    let message;
-
-    if (bookId === 'shadow') {
-        emailInput = document.getElementById('shadowEmail');
-        message = document.getElementById('shadowMessage');
-    }
-
-    else if (bookId === 'village') {
-        emailInput = document.getElementById('villageEmail');
-        message = document.getElementById('villageMessage');
-    }
-
-    else {
-        return;
-    }
-
-
-    const email = emailInput.value.trim();
-
-
-    if (!email) {
-        message.textContent = 'Please enter your email address.';
-        return;
-    }
-
-
-    if (!email.includes('@')) {
-        message.textContent = 'Please enter a valid email address.';
-        return;
-    }
-
-
-    message.textContent = 'Connecting to payment...';
-
-
-    try {
-
-        const response = await fetch('/api/initialize', {
-
-            method: 'POST',
-
-            headers: {
-                'Content-Type': 'application/json'
-            },
-
-            body: JSON.stringify({
-                email: email,
-                bookId: bookId
-            })
-
-        });
-
-
-        const data = await response.json();
-
-
-        if (data.authorization_url) {
-
-            window.location.href = data.authorization_url;
-
-        }
-
-        else {
-
-            message.textContent =
-                data.message ||
-                'Payment could not be initialized.';
-
-        }
-
-    }
-
-    catch (error) {
-
-        console.error(error);
-
-        message.textContent =
-            'Something went wrong. Please try again.';
-
-    }
-
-}
-
-</script>
-
-</body>
-          </html>
+    </footer>

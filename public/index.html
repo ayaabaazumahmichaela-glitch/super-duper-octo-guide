@@ -1,231 +1,235 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>His-Story</title>
+    <title>His-Story</title>
 
-<style>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
 
-* {
-    box-sizing: border-box;
-}
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f1e8;
+            color: #222;
+        }
 
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f4f1e8;
-    color: #222;
-}
+        header {
+            background: #123d2a;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
 
-header {
-    background: #123d2a;
-    color: white;
-    padding: 18px;
-    text-align: center;
-}
+        .logo {
+            width: 90px;
+            height: 90px;
+            object-fit: contain;
+            margin-bottom: 8px;
+        }
 
-.logo {
-    width: 80px;
-    height: 80px;
-    object-fit: contain;
-    margin-bottom: 8px;
-}
+        header h1 {
+            margin: 5px 0;
+            font-size: 30px;
+        }
 
-header h1 {
-    margin: 5px 0;
-    font-size: 30px;
-}
+        header p {
+            margin: 6px 0 0;
+            font-size: 15px;
+        }
 
-header p {
-    margin: 5px 0 0;
-    font-size: 15px;
-}
+        nav {
+            background: #0d2d20;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
 
-nav {
-    background: #0d2d20;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-}
+        nav button {
+            border: none;
+            background: transparent;
+            color: white;
+            padding: 15px 25px;
+            font-size: 16px;
+            cursor: pointer;
+        }
 
-nav button {
-    background: none;
-    border: none;
-    color: white;
-    padding: 14px 20px;
-    font-size: 16px;
-    cursor: pointer;
-}
+        nav button:hover {
+            background: #1c5a3e;
+        }
 
-nav button:hover {
-    background: #1c5a3e;
-}
+        .hero {
+            text-align: center;
+            padding: 45px 20px;
+            background: #e8dfc7;
+        }
 
-.hero {
-    text-align: center;
-    padding: 45px 20px;
-    background: #e8dfc7;
-}
+        .hero h2 {
+            margin: 0 0 15px;
+            color: #123d2a;
+            font-size: 30px;
+        }
 
-.hero h2 {
-    font-size: 30px;
-    margin-bottom: 12px;
-    color: #123d2a;
-}
+        .hero p {
+            max-width: 750px;
+            margin: auto;
+            line-height: 1.7;
+        }
 
-.hero p {
-    max-width: 700px;
-    margin: auto;
-    line-height: 1.7;
-}
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            padding: 30px 20px;
+        }
 
-.container {
-    max-width: 1000px;
-    margin: auto;
-    padding: 30px 20px;
-}
+        .page {
+            display: none;
+        }
 
-.page-title {
-    text-align: center;
-    color: #123d2a;
-    margin-bottom: 25px;
-}
+        .page.active {
+            display: block;
+        }
 
-.category-grid,
-.story-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-    gap: 20px;
-}
+        .page-title {
+            text-align: center;
+            color: #123d2a;
+            margin-bottom: 25px;
+        }
 
-.category-card,
-.story-product {
-    background: white;
-    border-radius: 12px;
-    padding: 20px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
-    text-align: center;
-}
+        .category-grid,
+        .book-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+        }
 
-.category-card {
-    cursor: pointer;
-    border: 2px solid #d6cba9;
-}
+        .category-card,
+        .book-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+        }
 
-.category-card:hover {
-    transform: translateY(-3px);
-}
+        .category-card {
+            border: 2px solid #d6cba9;
+            cursor: pointer;
+        }
 
-.category-card h3,
-.story-product h3 {
-    color: #123d2a;
-}
+        .category-card:hover {
+            transform: translateY(-3px);
+        }
 
-.category-card p {
-    line-height: 1.5;
-}
+        .category-card h3,
+        .book-card h3 {
+            color: #123d2a;
+        }
 
-.cover {
-    width: 100%;
-    height: 300px;
-    background: #ddd;
-    border-radius: 8px;
-    overflow: hidden;
-    margin-bottom: 15px;
-}
+        .category-card p {
+            line-height: 1.6;
+        }
 
-.cover img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-}
+        .cover {
+            width: 100%;
+            height: 320px;
+            overflow: hidden;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            background: #ddd;
+        }
 
-.price {
-    font-size: 20px;
-    font-weight: bold;
-    color: #a47700;
-    margin: 12px 0;
-}
+        .cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
 
-.story-product input {
-    width: 100%;
-    padding: 12px;
-    margin: 8px 0;
-    border: 1px solid #bbb;
-    border-radius: 6px;
-    font-size: 15px;
-}
+        .price {
+            font-size: 20px;
+            font-weight: bold;
+            color: #a47700;
+            margin: 12px 0;
+        }
 
-.buy-btn {
-    width: 100%;
-    padding: 12px;
-    background: #123d2a;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    font-size: 16px;
-    cursor: pointer;
-}
+        .book-card input {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border: 1px solid #bbb;
+            border-radius: 6px;
+            font-size: 15px;
+        }
 
-.buy-btn:hover {
-    background: #1c5a3e;
-}
+        .buy-btn {
+            width: 100%;
+            padding: 12px;
+            background: #123d2a;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+        }
 
-.message {
-    margin-top: 10px;
-    font-size: 14px;
-    color: #b00020;
-}
+        .buy-btn:hover {
+            background: #1c5a3e;
+        }
 
-.back-btn {
-    display: block;
-    margin: 25px auto 0;
-    padding: 10px 20px;
-    background: #a47700;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-}
+        .message {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #b00020;
+        }
 
-footer {
-    margin-top: 40px;
-    background: #123d2a;
-    color: white;
-    text-align: center;
-    padding: 20px;
-    font-size: 14px;
-}
+        .back-btn {
+            display: block;
+            margin: 30px auto 0;
+            padding: 11px 22px;
+            background: #a47700;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 15px;
+        }
 
-@media (max-width: 600px) {
+        footer {
+            margin-top: 40px;
+            background: #123d2a;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 14px;
+        }
 
-    header h1 {
-        font-size: 25px;
-    }
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 25px;
+            }
 
-    .hero h2 {
-        font-size: 25px;
-    }
+            .hero h2 {
+                font-size: 25px;
+            }
 
-    .container {
-        padding: 25px 15px;
-    }
+            .container {
+                padding: 25px 15px;
+            }
 
-    .cover {
-        height: 280px;
-    }
-
-}
-
-</style>
+            .cover {
+                height: 300px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
 <header>
-
     <img
         src="his-story-logo.png"
         alt="His-Story Logo"
@@ -234,50 +238,40 @@ footer {
 
     <h1>His-Story</h1>
 
-    <p>
-        Stories that remember. History that lives.
-    </p>
-
+    <p>Stories that remember. History that lives.</p>
 </header>
 
 
 <nav>
-
-    <button onclick="showPage('home')">
+    <button type="button" onclick="showPage('home')">
         Home
     </button>
 
-    <button onclick="showPage('history')">
+    <button type="button" onclick="showPage('history')">
         History
     </button>
 
-    <button onclick="showPage('stories')">
+    <button type="button" onclick="showPage('stories')">
         Stories
     </button>
-
 </nav>
 
 
 <section class="hero" id="hero">
-
-    <h2>
-        Welcome to His-Story
-    </h2>
+    <h2>Stories That Remember. History That Lives.</h2>
 
     <p>
-        Discover powerful stories and meaningful history through books
-        created to educate, inspire and entertain.
+        Discover the history of people, places, civilizations,
+        kingdoms, cultures, discoveries and important events from
+        around the world through carefully prepared books and stories.
     </p>
-
 </section>
 
 
-<div class="container">
-
+<main class="container">
 
     <!-- HOME -->
-
-    <section class="book" id="home">
+    <section id="home" class="page active">
 
         <h2 class="page-title">
             Explore His-Story
@@ -285,21 +279,16 @@ footer {
 
         <div class="category-grid">
 
-
             <div
                 class="category-card"
                 onclick="showPage('history')"
             >
-
-                <h3>
-                    📚 History
-                </h3>
+                <h3>📚 History</h3>
 
                 <p>
-                    Explore important historical stories, people,
-                    events and lessons from the past.
+                    Explore important people, events, civilizations,
+                    places and moments that shaped our world.
                 </p>
-
             </div>
 
 
@@ -307,65 +296,44 @@ footer {
                 class="category-card"
                 onclick="showPage('stories')"
             >
-
-                <h3>
-                    📖 Stories
-                </h3>
+                <h3>📖 Stories</h3>
 
                 <p>
-                    Discover exciting original stories filled with
-                    adventure, mystery, wisdom and life lessons.
+                    Discover original stories filled with adventure,
+                    mystery, wisdom and meaningful life lessons.
                 </p>
-
             </div>
-
 
         </div>
 
     </section>
 
 
-
     <!-- HISTORY -->
-
-    <section
-        class="book"
-        id="history"
-        style="display:none;"
-    >
+    <section id="history" class="page">
 
         <h2 class="page-title">
             History Books
         </h2>
 
+        <div class="book-grid">
 
-        <div class="story-grid">
-
-
-            <!-- THE HISTORY OF OSAGYEFO DR. KWAME NKRUMAH -->
-
-            <div class="story-product">
-
+            <div class="book-card">
 
                 <div class="cover">
-
                     <img
                         src="the_history_of_osagyefo_dr_kwame_nkrumah_cover.png"
-                        alt="The History of Osagyefo Dr. Kwame Nkrumah Cover"
+                        alt="The History of Osagyefo Dr. Kwame Nkrumah"
                     >
-
                 </div>
-
 
                 <h3>
                     THE HISTORY OF OSAGYEFO DR. KWAME NKRUMAH
                 </h3>
 
-
                 <div class="price">
                     GH¢25
                 </div>
-
 
                 <input
                     type="email"
@@ -373,28 +341,25 @@ footer {
                     placeholder="Enter your email"
                 >
 
-
                 <button
+                    type="button"
                     class="buy-btn"
                     onclick="buyBook('nkrumah')"
                 >
-                    Buy THE HISTORY OF OSAGYEFO DR. KWAME NKRUMAH — GH¢25
+                    Buy The History of Kwame Nkrumah — GH¢25
                 </button>
-
 
                 <div
                     class="message"
                     id="nkrumahMessage"
                 ></div>
 
-
             </div>
-
 
         </div>
 
-
         <button
+            type="button"
             class="back-btn"
             onclick="showPage('home')"
         >
@@ -404,47 +369,32 @@ footer {
     </section>
 
 
-
     <!-- STORIES -->
-
-    <section
-        class="book"
-        id="stories"
-        style="display:none;"
-    >
+    <section id="stories" class="page">
 
         <h2 class="page-title">
             Story Books
         </h2>
 
+        <div class="book-grid">
 
-        <div class="story-grid">
-
-
-            <!-- THE BOY WHO SOLD HIS SHADOW -->
-
-            <div class="story-product">
-
+            <!-- BOY WHO SOLD HIS SHADOW -->
+            <div class="book-card">
 
                 <div class="cover">
-
                     <img
                         src="the_boy_who_sold_his_shadow_cover.png"
-                        alt="The Boy Who Sold His Shadow Cover"
+                        alt="The Boy Who Sold His Shadow"
                     >
-
                 </div>
-
 
                 <h3>
                     The Boy Who Sold His Shadow
                 </h3>
 
-
                 <div class="price">
                     GH¢20
                 </div>
-
 
                 <input
                     type="email"
@@ -452,49 +402,39 @@ footer {
                     placeholder="Enter your email"
                 >
 
-
                 <button
+                    type="button"
                     class="buy-btn"
                     onclick="buyBook('shadow')"
                 >
                     Buy The Boy Who Sold His Shadow — GH¢20
                 </button>
 
-
                 <div
                     class="message"
                     id="shadowMessage"
                 ></div>
 
-
             </div>
 
 
-
-            <!-- THE VILLAGE THAT FORGOT ITS NAME -->
-
-            <div class="story-product">
-
+            <!-- VILLAGE THAT FORGOT ITS NAME -->
+            <div class="book-card">
 
                 <div class="cover">
-
                     <img
                         src="the_village_that_forgot_its_name_cover.png"
-                        alt="The Village That Forgot Its Name Cover"
+                        alt="The Village That Forgot Its Name"
                     >
-
                 </div>
-
 
                 <h3>
                     The Village That Forgot Its Name
                 </h3>
 
-
                 <div class="price">
                     GH¢20
                 </div>
-
 
                 <input
                     type="email"
@@ -502,28 +442,25 @@ footer {
                     placeholder="Enter your email"
                 >
 
-
                 <button
+                    type="button"
                     class="buy-btn"
                     onclick="buyBook('village')"
                 >
                     Buy The Village That Forgot Its Name — GH¢20
                 </button>
 
-
                 <div
                     class="message"
                     id="villageMessage"
                 ></div>
 
-
             </div>
-
 
         </div>
 
-
         <button
+            type="button"
             class="back-btn"
             onclick="showPage('home')"
         >
@@ -532,13 +469,140 @@ footer {
 
     </section>
 
-
-</div>
-
+</main>
 
 
 <footer>
-
     © His-Story — Stories that remember. History that lives.
+</footer>
 
-    </footer>
+
+<script>
+
+function showPage(pageId) {
+
+    const pages = document.querySelectorAll('.page');
+
+    pages.forEach(function(page) {
+        page.classList.remove('active');
+    });
+
+    const selectedPage = document.getElementById(pageId);
+
+    if (selectedPage) {
+        selectedPage.classList.add('active');
+    }
+
+    const hero = document.getElementById('hero');
+
+    if (pageId === 'home') {
+        hero.style.display = 'block';
+    } else {
+        hero.style.display = 'none';
+    }
+
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
+
+
+async function buyBook(bookId) {
+
+    let emailInput;
+    let message;
+
+    if (bookId === 'shadow') {
+
+        emailInput = document.getElementById('shadowEmail');
+        message = document.getElementById('shadowMessage');
+
+    } else if (bookId === 'village') {
+
+        emailInput = document.getElementById('villageEmail');
+        message = document.getElementById('villageMessage');
+
+    } else if (bookId === 'nkrumah') {
+
+        emailInput = document.getElementById('nkrumahEmail');
+        message = document.getElementById('nkrumahMessage');
+
+    } else {
+
+        return;
+    }
+
+
+    const email = emailInput.value.trim();
+
+
+    if (!email) {
+
+        message.textContent =
+            'Please enter your email address.';
+
+        return;
+    }
+
+
+    if (!email.includes('@')) {
+
+        message.textContent =
+            'Please enter a valid email address.';
+
+        return;
+    }
+
+
+    message.textContent =
+        'Connecting to payment...';
+
+
+    try {
+
+        const response = await fetch(
+            '/api/initialize',
+            {
+                method: 'POST',
+
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+
+                body: JSON.stringify({
+                    email: email,
+                    bookId: bookId
+                })
+            }
+        );
+
+
+        const data = await response.json();
+
+
+        if (data.authorization_url) {
+
+            window.location.href =
+                data.authorization_url;
+
+        } else {
+
+            message.textContent =
+                data.message ||
+                'Payment could not be initialized.';
+        }
+
+    } catch (error) {
+
+        console.error(error);
+
+        message.textContent =
+            'Something went wrong. Please try again.';
+    }
+}
+
+</script>
+
+</body>
+                     </html>

@@ -22,10 +22,18 @@
             color: #26231d;
         }
 
+        /* TOP SECTION */
+        .site-top {
+            display: block;
+        }
+
+        .site-top.hidden {
+            display: none;
+        }
+
         /* HEADER */
         header {
-            background:
-                linear-gradient(rgba(10, 35, 24, 0.94), rgba(10, 35, 24, 0.94));
+            background: #0a2318;
             color: white;
             text-align: center;
             padding: 28px 20px 24px;
@@ -81,11 +89,7 @@
         .hero {
             text-align: center;
             padding: 70px 20px;
-            background:
-                linear-gradient(
-                    rgba(232, 222, 194, 0.93),
-                    rgba(232, 222, 194, 0.93)
-                );
+            background: #e8dec2;
             border-bottom: 1px solid #d1c29a;
         }
 
@@ -97,7 +101,7 @@
             line-height: 1.2;
         }
 
-        .hero .gold-line {
+        .gold-line {
             width: 80px;
             height: 3px;
             background: #c9a227;
@@ -142,7 +146,7 @@
             line-height: 1.6;
         }
 
-        /* HOME CATEGORY CARDS */
+        /* HOME */
         .category-grid {
             display: grid;
             grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -185,7 +189,7 @@
             margin: 0;
         }
 
-        /* BOOK GRID */
+        /* BOOKS */
         .book-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
@@ -380,61 +384,85 @@
 
 <body>
 
-<header>
+<!-- TOP SECTION -->
 
-    <img
-        src="his-story-logo.png"
-        alt="His-Story Logo"
-        class="logo"
-    >
+<div class="site-top" id="siteTop">
 
-    <h1>His-Story</h1>
+    <header>
 
-    <p>Stories that remember. History that lives.</p>
+        <img
+            src="his-story-logo.png"
+            alt="His-Story Logo"
+            class="logo"
+        >
 
-</header>
+        <h1>
+            His-Story
+        </h1>
 
+        <p>
+            Stories that remember. History that lives.
+        </p>
 
-<nav>
-
-    <button type="button" onclick="showPage('home')">
-        Home
-    </button>
-
-    <button type="button" onclick="showPage('history')">
-        History
-    </button>
-
-    <button type="button" onclick="showPage('stories')">
-        Stories
-    </button>
-
-</nav>
+    </header>
 
 
-<section class="hero" id="hero">
+    <nav>
 
-    <h2>
-        Stories That Remember. History That Lives.
-    </h2>
+        <button
+            type="button"
+            onclick="showPage('home')"
+        >
+            Home
+        </button>
 
-    <div class="gold-line"></div>
+        <button
+            type="button"
+            onclick="showPage('history')"
+        >
+            History
+        </button>
 
-    <p>
-        Discover the history of people, places, civilizations,
-        kingdoms, cultures, discoveries and important events from
-        around the world through carefully prepared books and stories.
-    </p>
+        <button
+            type="button"
+            onclick="showPage('stories')"
+        >
+            Stories
+        </button>
 
-</section>
+    </nav>
 
+
+    <section class="hero" id="hero">
+
+        <h2>
+            Stories That Remember. History That Lives.
+        </h2>
+
+        <div class="gold-line"></div>
+
+        <p>
+            Discover the history of people, places, civilizations,
+            kingdoms, cultures, discoveries and important events from
+            around the world through carefully prepared books and stories.
+        </p>
+
+    </section>
+
+</div>
+
+
+<!-- MAIN -->
 
 <main class="container">
 
 
     <!-- HOME -->
 
-    <section id="home" class="page active">
+    <section
+        id="home"
+        class="page active"
+    >
 
         <h2 class="page-title">
             Explore His-Story
@@ -447,6 +475,7 @@
 
 
         <div class="category-grid">
+
 
             <div
                 class="category-card"
@@ -496,7 +525,10 @@
 
     <!-- HISTORY -->
 
-    <section id="history" class="page">
+    <section
+        id="history"
+        class="page"
+    >
 
         <h2 class="page-title">
             History Books
@@ -511,7 +543,7 @@
         <div class="book-grid">
 
 
-            <!-- THE HISTORY OF GHANA -->
+            <!-- GHANA -->
 
             <div class="book-card">
 
@@ -524,23 +556,19 @@
 
                 </div>
 
-
                 <h3>
                     THE HISTORY OF GHANA
                 </h3>
 
-
                 <div class="price">
                     GH¢25
                 </div>
-
 
                 <input
                     type="email"
                     id="ghanaEmail"
                     placeholder="Enter your email"
                 >
-
 
                 <button
                     type="button"
@@ -550,7 +578,6 @@
                     Buy The History of Ghana — GH¢25
                 </button>
 
-
                 <div
                     class="message"
                     id="ghanaMessage"
@@ -559,7 +586,7 @@
             </div>
 
 
-            <!-- THE HISTORY OF OSAGYEFO DR. KWAME NKRUMAH -->
+            <!-- NKRUMAH -->
 
             <div class="book-card">
 
@@ -572,23 +599,19 @@
 
                 </div>
 
-
                 <h3>
                     THE HISTORY OF OSAGYEFO DR. KWAME NKRUMAH
                 </h3>
 
-
                 <div class="price">
                     GH¢25
                 </div>
-
 
                 <input
                     type="email"
                     id="nkrumahEmail"
                     placeholder="Enter your email"
                 >
-
 
                 <button
                     type="button"
@@ -597,7 +620,6 @@
                 >
                     Buy The History of Kwame Nkrumah — GH¢25
                 </button>
-
 
                 <div
                     class="message"
@@ -622,7 +644,10 @@
 
     <!-- STORIES -->
 
-    <section id="stories" class="page">
+    <section
+        id="stories"
+        class="page"
+    >
 
         <h2 class="page-title">
             Story Books
@@ -637,7 +662,7 @@
         <div class="book-grid">
 
 
-            <!-- THE BOY WHO SOLD HIS SHADOW -->
+            <!-- BOY WHO SOLD HIS SHADOW -->
 
             <div class="book-card">
 
@@ -650,23 +675,19 @@
 
                 </div>
 
-
                 <h3>
                     The Boy Who Sold His Shadow
                 </h3>
 
-
                 <div class="price">
                     GH¢20
                 </div>
-
 
                 <input
                     type="email"
                     id="shadowEmail"
                     placeholder="Enter your email"
                 >
-
 
                 <button
                     type="button"
@@ -676,7 +697,6 @@
                     Buy The Boy Who Sold His Shadow — GH¢20
                 </button>
 
-
                 <div
                     class="message"
                     id="shadowMessage"
@@ -685,7 +705,7 @@
             </div>
 
 
-            <!-- THE VILLAGE THAT FORGOT ITS NAME -->
+            <!-- VILLAGE -->
 
             <div class="book-card">
 
@@ -698,23 +718,19 @@
 
                 </div>
 
-
                 <h3>
                     The Village That Forgot Its Name
                 </h3>
 
-
                 <div class="price">
                     GH¢20
                 </div>
-
 
                 <input
                     type="email"
                     id="villageEmail"
                     placeholder="Enter your email"
                 >
-
 
                 <button
                     type="button"
@@ -723,7 +739,6 @@
                 >
                     Buy The Village That Forgot Its Name — GH¢20
                 </button>
-
 
                 <div
                     class="message"
@@ -750,7 +765,11 @@
 
 <footer>
 
-    <strong>His-Story</strong><br>
+    <strong>
+        His-Story
+    </strong>
+
+    <br>
 
     Stories that remember. History that lives.
 
@@ -784,17 +803,17 @@ function showPage(pageId) {
     }
 
 
-    const hero =
-        document.getElementById('hero');
+    const siteTop =
+        document.getElementById('siteTop');
 
 
     if (pageId === 'home') {
 
-        hero.style.display = 'block';
+        siteTop.classList.remove('hidden');
 
     } else {
 
-        hero.style.display = 'none';
+        siteTop.classList.add('hidden');
 
     }
 
@@ -935,4 +954,4 @@ async function buyBook(bookId) {
 </script>
 
 </body>
-                    </html>
+    </html>

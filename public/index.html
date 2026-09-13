@@ -7,6 +7,7 @@
     <title>His-Story | History & Stories</title>
 
     <style>
+
         * {
             box-sizing: border-box;
         }
@@ -23,6 +24,7 @@
         }
 
         /* TOP SECTION */
+
         .site-top {
             display: block;
         }
@@ -31,7 +33,9 @@
             display: none;
         }
 
+
         /* HEADER */
+
         header {
             background: #0a2318;
             color: white;
@@ -60,7 +64,9 @@
             letter-spacing: 0.5px;
         }
 
+
         /* NAVIGATION */
+
         nav {
             background: #081f15;
             display: flex;
@@ -85,7 +91,9 @@
             color: #f0cf62;
         }
 
+
         /* HERO */
+
         .hero {
             text-align: center;
             padding: 70px 20px;
@@ -116,7 +124,9 @@
             color: #4b463b;
         }
 
+
         /* MAIN */
+
         .container {
             max-width: 1100px;
             margin: auto;
@@ -146,7 +156,9 @@
             line-height: 1.6;
         }
 
+
         /* HOME */
+
         .category-grid {
             display: grid;
             grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -189,7 +201,9 @@
             margin: 0;
         }
 
+
         /* BOOKS */
+
         .book-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
@@ -283,7 +297,9 @@
             color: #b00020;
         }
 
+
         /* ABOUT */
+
         .about-box {
             max-width: 850px;
             margin: 0 auto;
@@ -318,7 +334,9 @@
             line-height: 1.7;
         }
 
+
         /* BACK BUTTON */
+
         .back-btn {
             display: block;
             margin: 35px auto 0;
@@ -336,7 +354,9 @@
             background: #866300;
         }
 
+
         /* FOOTER */
+
         footer {
             margin-top: 35px;
             background: #081f15;
@@ -351,7 +371,9 @@
             color: #e4c55d;
         }
 
+
         /* MOBILE */
+
         @media (max-width: 700px) {
 
             header {
@@ -404,6 +426,7 @@
             }
         }
 
+
         @media (max-width: 400px) {
 
             .hero h2 {
@@ -418,10 +441,13 @@
                 font-size: 18px;
             }
         }
+
     </style>
 </head>
 
+
 <body>
+
 
 <!-- TOP SECTION -->
 
@@ -479,7 +505,7 @@
     </nav>
 
 
-    <section class="hero" id="hero">
+    <section class="hero">
 
         <h2>
             Stories That Remember. History That Lives.
@@ -521,6 +547,7 @@
 
 
         <div class="category-grid">
+
 
             <div
                 class="category-card"
@@ -866,10 +893,14 @@
 
 
             <div class="about-highlight">
+
                 Our goal is simple: to help history remain remembered
                 and stories remain alive.
+
                 <br><br>
+
                 Stories that remember. History that lives.
+
             </div>
 
         </div>
@@ -888,6 +919,8 @@
 </main>
 
 
+<!-- FOOTER -->
+
 <footer>
 
     <strong>
@@ -901,10 +934,160 @@
 </footer>
 
 
-<script>
+<!-- JAVASCRIPT -->
 
+<script>
 
 function showPage(pageId) {
 
-    const pages =
-        document
+    const pages = document.querySelectorAll(".page");
+
+    pages.forEach(function(page) {
+        page.classList.remove("active");
+    });
+
+    const selectedPage = document.getElementById(pageId);
+
+    if (selectedPage) {
+        selectedPage.classList.add("active");
+    }
+
+    const siteTop = document.getElementById("siteTop");
+
+    if (pageId === "home") {
+        siteTop.classList.remove("hidden");
+    } else {
+        siteTop.classList.add("hidden");
+    }
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+
+
+async function buyBook(bookId) {
+
+    let emailInput;
+    let message;
+
+    if (bookId === "shadow") {
+
+        emailInput =
+            document.getElementById("shadowEmail");
+
+        message =
+            document.getElementById("shadowMessage");
+
+    } else if (bookId === "village") {
+
+        emailInput =
+            document.getElementById("villageEmail");
+
+        message =
+            document.getElementById("villageMessage");
+
+    } else if (bookId === "nkrumah") {
+
+        emailInput =
+            document.getElementById("nkrumahEmail");
+
+        message =
+            document.getElementById("nkrumahMessage");
+
+    } else if (bookId === "ghana") {
+
+        emailInput =
+            document.getElementById("ghanaEmail");
+
+        message =
+            document.getElementById("ghanaMessage");
+
+    } else {
+
+        return;
+
+    }
+
+
+    const email =
+        emailInput.value.trim();
+
+
+    if (!email) {
+
+        message.textContent =
+            "Please enter your email address.";
+
+        return;
+    }
+
+
+    if (!email.includes("@")) {
+
+        message.textContent =
+            "Please enter a valid email address.";
+
+        return;
+    }
+
+
+    message.textContent =
+        "Connecting to payment...";
+
+
+    try {
+
+        const response =
+            await fetch(
+                "/api/initialize",
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body: JSON.stringify({
+                        email: email,
+                        bookId: bookId
+                    })
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (data.authorization_url) {
+
+            window.location.href =
+                data.authorization_url;
+
+        } else {
+
+            message.textContent =
+                data.message ||
+                data.error ||
+                "Payment could not be initialized.";
+
+        }
+
+    } catch (error) {
+
+        console.error(error);
+
+        message.textContent =
+            "Something went wrong. Please try again.";
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>

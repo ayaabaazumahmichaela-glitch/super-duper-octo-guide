@@ -51,6 +51,14 @@ const BOOKS = {
     price: "GH¢25",
     file: "the_history_of_osagyefo_dr_kwame_nkrumah.pdf",
     downloadName: "the_history_of_osagyefo_dr_kwame_nkrumah.pdf"
+  },
+
+  ghana: {
+    name: "THE HISTORY OF GHANA",
+    amount: 2500,
+    price: "GH¢25",
+    file: "the_history_of_ghana.pdf",
+    downloadName: "the_history_of_ghana.pdf"
   }
 };
 
@@ -302,6 +310,7 @@ app.get("/api/download", async (req, res) => {
 
     const filePath = path.join(
       __dirname,
+      "public",
       book.file
     );
 

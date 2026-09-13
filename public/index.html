@@ -241,7 +241,6 @@
     <p>Stories that remember. History that lives.</p>
 </header>
 
-
 <nav>
     <button type="button" onclick="showPage('home')">
         Home
@@ -256,7 +255,6 @@
     </button>
 </nav>
 
-
 <section class="hero" id="hero">
     <h2>Stories That Remember. History That Lives.</h2>
 
@@ -266,7 +264,6 @@
         around the world through carefully prepared books and stories.
     </p>
 </section>
-
 
 <main class="container">
 
@@ -291,7 +288,6 @@
                 </p>
             </div>
 
-
             <div
                 class="category-card"
                 onclick="showPage('stories')"
@@ -307,7 +303,6 @@
         </div>
 
     </section>
-
 
     <!-- HISTORY -->
     <section id="history" class="page">
@@ -368,7 +363,6 @@
 
     </section>
 
-
     <!-- STORIES -->
     <section id="stories" class="page">
 
@@ -416,7 +410,6 @@
                 ></div>
 
             </div>
-
 
             <!-- VILLAGE THAT FORGOT ITS NAME -->
             <div class="book-card">
@@ -471,12 +464,12 @@
 
 </main>
 
-
 <footer>
     © His-Story — Stories that remember. History that lives.
 </footer>
 
 <script>
+
 function showPage(pageId) {
 
     const pages = document.querySelectorAll('.page');
@@ -499,7 +492,104 @@ function showPage(pageId) {
         hero.style.display = 'none';
     }
 }
+
+
+async function buyBook(bookId) {
+
+    let emailInput;
+    let message;
+
+    if (bookId === 'shadow') {
+
+        emailInput = document.getElementById('shadowEmail');
+        message = document.getElementById('shadowMessage');
+
+    } else if (bookId === 'village') {
+
+        emailInput = document.getElementById('villageEmail');
+        message = document.getElementById('villageMessage');
+
+    } else if (bookId === 'nkrumah') {
+
+        emailInput = document.getElementById('nkrumahEmail');
+        message = document.getElementById('nkrumahMessage');
+
+    } else {
+
+        return;
+    }
+
+
+    const email = emailInput.value.trim();
+
+
+    if (!email) {
+
+        message.textContent =
+            'Please enter your email address.';
+
+        return;
+    }
+
+
+    if (!email.includes('@')) {
+
+        message.textContent =
+            'Please enter a valid email address.';
+
+        return;
+    }
+
+
+    message.textContent =
+        'Connecting to payment...';
+
+
+    try {
+
+        const response = await fetch(
+            '/api/initialize',
+            {
+                method: 'POST',
+
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+
+                body: JSON.stringify({
+                    email: email,
+                    bookId: bookId
+                })
+            }
+        );
+
+
+        const data = await response.json();
+
+
+        if (data.authorization_url) {
+
+            window.location.href =
+                data.authorization_url;
+
+        } else {
+
+            message.textContent =
+                data.message ||
+                'Payment could not be initialized.';
+        }
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        message.textContent =
+            'Something went wrong. Please try again.';
+    }
+}
+
 </script>
 
 </body>
-                     </html>
+                    </html>

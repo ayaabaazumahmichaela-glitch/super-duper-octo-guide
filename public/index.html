@@ -73,7 +73,7 @@
             border: none;
             background: transparent;
             color: #f8f3e5;
-            padding: 15px 28px;
+            padding: 15px 25px;
             font-family: Georgia, "Times New Roman", serif;
             font-size: 16px;
             cursor: pointer;
@@ -283,6 +283,41 @@
             color: #b00020;
         }
 
+        /* ABOUT */
+        .about-box {
+            max-width: 850px;
+            margin: 0 auto;
+            background: #fffdf8;
+            border: 1px solid #ddd2b5;
+            border-top: 5px solid #c9a227;
+            border-radius: 14px;
+            padding: 35px 30px;
+            box-shadow: 0 8px 25px rgba(42, 35, 20, 0.08);
+        }
+
+        .about-box h3 {
+            color: #123d2a;
+            font-size: 24px;
+            margin-top: 0;
+        }
+
+        .about-box p {
+            color: #4f4a40;
+            line-height: 1.9;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .about-highlight {
+            margin-top: 28px;
+            padding: 20px;
+            background: #f1ead7;
+            border-left: 4px solid #c9a227;
+            color: #123d2a;
+            font-weight: bold;
+            line-height: 1.7;
+        }
+
         /* BACK BUTTON */
         .back-btn {
             display: block;
@@ -361,7 +396,11 @@
             }
 
             nav button {
-                padding: 14px 20px;
+                padding: 14px 18px;
+            }
+
+            .about-box {
+                padding: 28px 20px;
             }
         }
 
@@ -430,6 +469,13 @@
             Stories
         </button>
 
+        <button
+            type="button"
+            onclick="showPage('about')"
+        >
+            About
+        </button>
+
     </nav>
 
 
@@ -475,7 +521,6 @@
 
 
         <div class="category-grid">
-
 
             <div
                 class="category-card"
@@ -760,6 +805,86 @@
 
     </section>
 
+
+    <!-- ABOUT -->
+
+    <section
+        id="about"
+        class="page"
+    >
+
+        <h2 class="page-title">
+            About His-Story
+        </h2>
+
+        <p class="section-subtitle">
+            Discover what His-Story is, why it exists, and what readers
+            can find on the platform.
+        </p>
+
+
+        <div class="about-box">
+
+            <h3>
+                What is His-Story?
+            </h3>
+
+            <p>
+                His-Story is a digital platform created to bring history
+                and storytelling closer to readers. We believe that the
+                past is more than a collection of dates and names.
+                It is made up of people, places, cultures, kingdoms,
+                discoveries, struggles, achievements and events that
+                continue to shape the world.
+            </p>
+
+
+            <h3>
+                Our Purpose
+            </h3>
+
+            <p>
+                Our purpose is to make history and storytelling accessible
+                through carefully prepared digital books. His-Story aims
+                to preserve important histories while also creating
+                original stories that entertain, inspire and communicate
+                meaningful lessons.
+            </p>
+
+
+            <h3>
+                What Readers Can Find
+            </h3>
+
+            <p>
+                Readers can explore histories from Ghana, Africa and
+                around the world, learn about important historical
+                figures and events, discover civilizations and cultures,
+                and enjoy original stories filled with adventure,
+                mystery, wisdom and imagination.
+            </p>
+
+
+            <div class="about-highlight">
+                Our goal is simple: to help history remain remembered
+                and stories remain alive.
+                <br><br>
+                Stories that remember. History that lives.
+            </div>
+
+        </div>
+
+
+        <button
+            type="button"
+            class="back-btn"
+            onclick="showPage('home')"
+        >
+            Back to Home
+        </button>
+
+    </section>
+
 </main>
 
 
@@ -782,176 +907,4 @@
 function showPage(pageId) {
 
     const pages =
-        document.querySelectorAll('.page');
-
-
-    pages.forEach(function(page) {
-
-        page.classList.remove('active');
-
-    });
-
-
-    const selectedPage =
-        document.getElementById(pageId);
-
-
-    if (selectedPage) {
-
-        selectedPage.classList.add('active');
-
-    }
-
-
-    const siteTop =
-        document.getElementById('siteTop');
-
-
-    if (pageId === 'home') {
-
-        siteTop.classList.remove('hidden');
-
-    } else {
-
-        siteTop.classList.add('hidden');
-
-    }
-
-}
-
-
-
-async function buyBook(bookId) {
-
-    let emailInput;
-
-    let message;
-
-
-    if (bookId === 'shadow') {
-
-        emailInput =
-            document.getElementById('shadowEmail');
-
-        message =
-            document.getElementById('shadowMessage');
-
-
-    } else if (bookId === 'village') {
-
-        emailInput =
-            document.getElementById('villageEmail');
-
-        message =
-            document.getElementById('villageMessage');
-
-
-    } else if (bookId === 'nkrumah') {
-
-        emailInput =
-            document.getElementById('nkrumahEmail');
-
-        message =
-            document.getElementById('nkrumahMessage');
-
-
-    } else if (bookId === 'ghana') {
-
-        emailInput =
-            document.getElementById('ghanaEmail');
-
-        message =
-            document.getElementById('ghanaMessage');
-
-
-    } else {
-
-        return;
-
-    }
-
-
-    const email =
-        emailInput.value.trim();
-
-
-    if (!email) {
-
-        message.textContent =
-            'Please enter your email address.';
-
-        return;
-
-    }
-
-
-    if (!email.includes('@')) {
-
-        message.textContent =
-            'Please enter a valid email address.';
-
-        return;
-
-    }
-
-
-    message.textContent =
-        'Connecting to payment...';
-
-
-    try {
-
-        const response =
-            await fetch(
-                '/api/initialize',
-                {
-                    method: 'POST',
-
-                    headers: {
-                        'Content-Type':
-                            'application/json'
-                    },
-
-                    body: JSON.stringify({
-                        email: email,
-                        bookId: bookId
-                    })
-                }
-            );
-
-
-        const data =
-            await response.json();
-
-
-        if (data.authorization_url) {
-
-            window.location.href =
-                data.authorization_url;
-
-        } else {
-
-            message.textContent =
-                data.message ||
-                data.error ||
-                'Payment could not be initialized.';
-
-        }
-
-
-    } catch (error) {
-
-        console.error(error);
-
-        message.textContent =
-            'Something went wrong. Please try again.';
-
-    }
-
-}
-
-
-</script>
-
-</body>
-    </html>
+        document

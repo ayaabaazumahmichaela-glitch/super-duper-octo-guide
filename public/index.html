@@ -313,6 +313,46 @@
 
         <div class="book-grid">
 
+            <!-- THE HISTORY OF GHANA -->
+            <div class="book-card">
+
+                <div class="cover">
+                    <img
+                        src="the_history_of_ghana_cover.png"
+                        alt="The History of Ghana"
+                    >
+                </div>
+
+                <h3>
+                    THE HISTORY OF GHANA
+                </h3>
+
+                <div class="price">
+                    GH¢25
+                </div>
+
+                <input
+                    type="email"
+                    id="ghanaEmail"
+                    placeholder="Enter your email"
+                >
+
+                <button
+                    type="button"
+                    class="buy-btn"
+                    onclick="buyBook('ghana')"
+                >
+                    Buy The History of Ghana — GH¢25
+                </button>
+
+                <div
+                    class="message"
+                    id="ghanaMessage"
+                ></div>
+
+            </div>
+
+            <!-- THE HISTORY OF OSAGYEFO DR. KWAME NKRUMAH -->
             <div class="book-card">
 
                 <div class="cover">
@@ -514,6 +554,11 @@ async function buyBook(bookId) {
         emailInput = document.getElementById('nkrumahEmail');
         message = document.getElementById('nkrumahMessage');
 
+    } else if (bookId === 'ghana') {
+
+        emailInput = document.getElementById('ghanaEmail');
+        message = document.getElementById('ghanaMessage');
+
     } else {
 
         return;
@@ -576,6 +621,7 @@ async function buyBook(bookId) {
 
             message.textContent =
                 data.message ||
+                data.error ||
                 'Payment could not be initialized.';
         }
 
@@ -592,4 +638,4 @@ async function buyBook(bookId) {
 </script>
 
 </body>
-                    </html>
+    </html>

@@ -960,11 +960,29 @@ function showPage(pageId) {
         siteTop.classList.add("hidden");
     }
 
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
+    function showPage(pageId) {
+
+    const pages = document.querySelectorAll(".page");
+
+    pages.forEach(function(page) {
+        page.classList.remove("active");
     });
-}
+
+    const selectedPage = document.getElementById(pageId);
+
+    if (selectedPage) {
+        selectedPage.classList.add("active");
+    }
+
+    const siteTop = document.getElementById("siteTop");
+
+    if (pageId === "home") {
+        siteTop.classList.remove("hidden");
+    } else {
+        siteTop.classList.add("hidden");
+    }
+
+    }
 
 
 async function buyBook(bookId) {

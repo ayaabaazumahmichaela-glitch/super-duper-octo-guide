@@ -1,957 +1,827 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>His-Story | History & Stories</title>
-
-    <style>
-
-        * {
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            margin: 0;
-            font-family: Georgia, "Times New Roman", serif;
-            background: #f5f1e7;
-            color: #26231d;
-        }
-
-        /* TOP SECTION */
-
-        .site-top {
-            display: block;
-        }
-
-        .site-top.hidden {
-            display: none;
-        }
-
-
-        /* HEADER */
-
-        header {
-            background: #0a2318;
-            color: white;
-            text-align: center;
-            padding: 28px 20px 24px;
-            border-bottom: 3px solid #c9a227;
-        }
-
-        .logo {
-            width: 92px;
-            height: 92px;
-            object-fit: contain;
-            margin-bottom: 8px;
-        }
-
-        header h1 {
-            margin: 4px 0;
-            font-size: 34px;
-            letter-spacing: 1px;
-        }
-
-        header p {
-            margin: 7px 0 0;
-            color: #e7d49a;
-            font-size: 15px;
-            letter-spacing: 0.5px;
-        }
-
-
-        /* NAVIGATION */
-
-        nav {
-            background: #081f15;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            border-bottom: 1px solid #c9a227;
-        }
-
-        nav button {
-            border: none;
-            background: transparent;
-            color: #f8f3e5;
-            padding: 15px 25px;
-            font-family: Georgia, "Times New Roman", serif;
-            font-size: 16px;
-            cursor: pointer;
-            transition: 0.2s ease;
-        }
-
-        nav button:hover {
-            background: #174d35;
-            color: #f0cf62;
-        }
-
-
-        /* HERO */
-
-        .hero {
-            text-align: center;
-            padding: 70px 20px;
-            background: #e8dec2;
-            border-bottom: 1px solid #d1c29a;
-        }
-
-        .hero h2 {
-            margin: 0 auto 18px;
-            max-width: 850px;
-            color: #123d2a;
-            font-size: 38px;
-            line-height: 1.2;
-        }
-
-        .gold-line {
-            width: 80px;
-            height: 3px;
-            background: #c9a227;
-            margin: 0 auto 20px;
-        }
-
-        .hero p {
-            max-width: 760px;
-            margin: auto;
-            line-height: 1.8;
-            font-size: 17px;
-            color: #4b463b;
-        }
-
-
-        /* MAIN */
-
-        .container {
-            max-width: 1100px;
-            margin: auto;
-            padding: 45px 20px;
-        }
-
-        .page {
-            display: none;
-        }
-
-        .page.active {
-            display: block;
-        }
-
-        .page-title {
-            text-align: center;
-            color: #123d2a;
-            font-size: 31px;
-            margin: 0 0 10px;
-        }
-
-        .section-subtitle {
-            text-align: center;
-            max-width: 650px;
-            margin: 0 auto 35px;
-            color: #6b6457;
-            line-height: 1.6;
-        }
-
-
-        /* HOME */
-
-        .category-grid {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 25px;
-            max-width: 850px;
-            margin: 35px auto 0;
-        }
-
-        .category-card {
-            background: #fffdf8;
-            border: 1px solid #d8cda9;
-            border-top: 5px solid #c9a227;
-            border-radius: 14px;
-            padding: 34px 25px;
-            text-align: center;
-            cursor: pointer;
-            box-shadow: 0 8px 25px rgba(42, 35, 20, 0.08);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .category-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 30px rgba(42, 35, 20, 0.14);
-        }
-
-        .category-icon {
-            font-size: 43px;
-            margin-bottom: 8px;
-        }
-
-        .category-card h3 {
-            color: #123d2a;
-            font-size: 24px;
-            margin: 10px 0;
-        }
-
-        .category-card p {
-            color: #625c50;
-            line-height: 1.7;
-            margin: 0;
-        }
-
-
-        /* BOOKS */
-
-        .book-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-            gap: 28px;
-        }
-
-        .book-card {
-            background: #fffdf8;
-            border: 1px solid #ddd2b5;
-            border-radius: 14px;
-            padding: 18px;
-            text-align: center;
-            box-shadow: 0 8px 25px rgba(42, 35, 20, 0.08);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .book-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 30px rgba(42, 35, 20, 0.14);
-        }
-
-        .cover {
-            width: 100%;
-            height: 360px;
-            overflow: hidden;
-            border-radius: 9px;
-            margin-bottom: 18px;
-            background: #e8e2d4;
-            border: 1px solid #d4c8a9;
-        }
-
-        .cover img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-
-        .book-card h3 {
-            color: #123d2a;
-            font-size: 20px;
-            line-height: 1.35;
-            min-height: 54px;
-            margin: 8px 0;
-        }
-
-        .price {
-            font-size: 21px;
-            font-weight: bold;
-            color: #9a7200;
-            margin: 14px 0;
-        }
-
-        .book-card input {
-            width: 100%;
-            padding: 13px;
-            margin: 7px 0 10px;
-            border: 1px solid #c9c0aa;
-            border-radius: 7px;
-            font-family: Arial, sans-serif;
-            font-size: 15px;
-            background: white;
-        }
-
-        .book-card input:focus {
-            outline: 2px solid #c9a227;
-            border-color: #c9a227;
-        }
-
-        .buy-btn {
-            width: 100%;
-            padding: 13px;
-            background: #123d2a;
-            color: white;
-            border: none;
-            border-radius: 7px;
-            font-family: Georgia, "Times New Roman", serif;
-            font-size: 15px;
-            cursor: pointer;
-            transition: 0.2s ease;
-        }
-
-        .buy-btn:hover {
-            background: #1c5a3e;
-        }
-
-        .message {
-            min-height: 20px;
-            margin-top: 9px;
-            font-family: Arial, sans-serif;
-            font-size: 14px;
-            color: #b00020;
-        }
-
-
-        /* ABOUT */
-
-        .about-box {
-            max-width: 850px;
-            margin: 0 auto;
-            background: #fffdf8;
-            border: 1px solid #ddd2b5;
-            border-top: 5px solid #c9a227;
-            border-radius: 14px;
-            padding: 35px 30px;
-            box-shadow: 0 8px 25px rgba(42, 35, 20, 0.08);
-        }
-
-        .about-box h3 {
-            color: #123d2a;
-            font-size: 24px;
-            margin-top: 0;
-        }
-
-        .about-box p {
-            color: #4f4a40;
-            line-height: 1.9;
-            font-size: 16px;
-            margin-bottom: 20px;
-        }
-
-        .about-highlight {
-            margin-top: 28px;
-            padding: 20px;
-            background: #f1ead7;
-            border-left: 4px solid #c9a227;
-            color: #123d2a;
-            font-weight: bold;
-            line-height: 1.7;
-        }
-
-
-        /* BACK BUTTON */
-
-        .back-btn {
-            display: block;
-            margin: 35px auto 0;
-            padding: 12px 25px;
-            background: #a47700;
-            color: white;
-            border: none;
-            border-radius: 7px;
-            cursor: pointer;
-            font-family: Georgia, "Times New Roman", serif;
-            font-size: 15px;
-        }
-
-        .back-btn:hover {
-            background: #866300;
-        }
-
-
-        /* FOOTER */
-
-        footer {
-            margin-top: 35px;
-            background: #081f15;
-            color: #eee6d2;
-            text-align: center;
-            padding: 25px 20px;
-            font-size: 14px;
-            border-top: 3px solid #c9a227;
-        }
-
-        footer strong {
-            color: #e4c55d;
-        }
-
-
-        /* MOBILE */
-
-        @media (max-width: 700px) {
-
-            header {
-                padding: 22px 15px;
-            }
-
-            .logo {
-                width: 78px;
-                height: 78px;
-            }
-
-            header h1 {
-                font-size: 28px;
-            }
-
-            .hero {
-                padding: 50px 18px;
-            }
-
-            .hero h2 {
-                font-size: 29px;
-            }
-
-            .hero p {
-                font-size: 16px;
-            }
-
-            .container {
-                padding: 35px 15px;
-            }
-
-            .category-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .book-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .cover {
-                height: 390px;
-            }
-
-            nav button {
-                padding: 14px 18px;
-            }
-
-            .about-box {
-                padding: 28px 20px;
-            }
-        }
-
-
-        @media (max-width: 400px) {
-
-            .hero h2 {
-                font-size: 25px;
-            }
-
-            .cover {
-                height: 350px;
-            }
-
-            .book-card h3 {
-                font-size: 18px;
-            }
-        }
-
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>His-Story | History & Stories</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Georgia, "Times New Roman", serif;
+    background: #f5f1e7;
+    color: #26231d;
+}
+
+.site-top {
+    display: block;
+}
+
+.site-top.hidden {
+    display: none;
+}
+
+header {
+    background: #0a2318;
+    color: white;
+    text-align: center;
+    padding: 28px 20px 24px;
+    border-bottom: 3px solid #c9a227;
+}
+
+.logo {
+    width: 92px;
+    height: 92px;
+    object-fit: contain;
+    margin-bottom: 8px;
+}
+
+header h1 {
+    margin: 4px 0;
+    font-size: 34px;
+    letter-spacing: 1px;
+}
+
+header p {
+    margin: 7px 0 0;
+    color: #e7d49a;
+    font-size: 15px;
+}
+
+nav {
+    background: #081f15;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    border-bottom: 1px solid #c9a227;
+}
+
+nav button {
+    border: none;
+    background: transparent;
+    color: #f8f3e5;
+    padding: 15px 25px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+nav button:hover {
+    background: #174d35;
+    color: #f0cf62;
+}
+
+.about-nav-btn {
+    color: #f0cf62 !important;
+    font-weight: bold;
+    border-left: 1px solid #c9a227;
+    border-right: 1px solid #c9a227;
+}
+
+.about-nav-btn:hover {
+    background: #c9a227 !important;
+    color: #081f15 !important;
+}
+
+.hero {
+    text-align: center;
+    padding: 70px 20px;
+    background: #e8dec2;
+    border-bottom: 1px solid #d1c29a;
+}
+
+.hero h2 {
+    margin: 0 auto 18px;
+    max-width: 850px;
+    color: #123d2a;
+    font-size: 38px;
+    line-height: 1.2;
+}
+
+.gold-line {
+    width: 80px;
+    height: 3px;
+    background: #c9a227;
+    margin: 0 auto 20px;
+}
+
+.hero p {
+    max-width: 760px;
+    margin: auto;
+    line-height: 1.8;
+    font-size: 17px;
+    color: #4b463b;
+}
+
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 45px 20px;
+}
+
+.page {
+    display: none;
+}
+
+.page.active {
+    display: block;
+}
+
+.page-title {
+    text-align: center;
+    color: #123d2a;
+    font-size: 31px;
+    margin: 0 0 10px;
+}
+
+.section-subtitle {
+    text-align: center;
+    max-width: 650px;
+    margin: 0 auto 35px;
+    color: #6b6457;
+    line-height: 1.6;
+}
+
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 25px;
+    max-width: 850px;
+    margin: 35px auto 0;
+}
+
+.category-card {
+    background: #fffdf8;
+    border: 1px solid #d8cda9;
+    border-top: 5px solid #c9a227;
+    border-radius: 14px;
+    padding: 34px 25px;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 8px 25px rgba(42,35,20,.08);
+}
+
+.category-icon {
+    font-size: 43px;
+    margin-bottom: 8px;
+}
+
+.category-card h3 {
+    color: #123d2a;
+    font-size: 24px;
+    margin: 10px 0;
+}
+
+.category-card p {
+    color: #625c50;
+    line-height: 1.7;
+    margin: 0;
+}
+
+.book-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(270px,1fr));
+    gap: 28px;
+}
+
+.book-card {
+    background: #fffdf8;
+    border: 1px solid #ddd2b5;
+    border-radius: 14px;
+    padding: 18px;
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(42,35,20,.08);
+}
+
+.cover {
+    width: 100%;
+    height: 360px;
+    overflow: hidden;
+    border-radius: 9px;
+    margin-bottom: 18px;
+    background: #e8e2d4;
+    border: 1px solid #d4c8a9;
+}
+
+.cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.book-card h3 {
+    color: #123d2a;
+    font-size: 20px;
+    line-height: 1.35;
+    min-height: 54px;
+    margin: 8px 0;
+}
+
+.price {
+    font-size: 21px;
+    font-weight: bold;
+    color: #9a7200;
+    margin: 14px 0;
+}
+
+.book-card input {
+    width: 100%;
+    padding: 13px;
+    margin: 7px 0 10px;
+    border: 1px solid #c9c0aa;
+    border-radius: 7px;
+    font-size: 15px;
+}
+
+.buy-btn {
+    width: 100%;
+    padding: 13px;
+    background: #123d2a;
+    color: white;
+    border: none;
+    border-radius: 7px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.message {
+    min-height: 20px;
+    margin-top: 9px;
+    font-size: 14px;
+    color: #b00020;
+}
+    .about-box {
+    max-width: 850px;
+    margin: 0 auto;
+    background: #fffdf8;
+    border: 1px solid #ddd2b5;
+    border-top: 5px solid #c9a227;
+    border-radius: 14px;
+    padding: 35px 30px;
+    box-shadow: 0 8px 25px rgba(42,35,20,.08);
+}
+
+.about-box h3 {
+    color: #123d2a;
+    font-size: 24px;
+    margin-top: 0;
+}
+
+.about-box p {
+    color: #4f4a40;
+    line-height: 1.9;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.about-highlight {
+    margin-top: 28px;
+    padding: 20px;
+    background: #f1ead7;
+    border-left: 4px solid #c9a227;
+    color: #123d2a;
+    font-weight: bold;
+    line-height: 1.7;
+}
+
+.back-btn {
+    display: block;
+    margin: 35px auto 0;
+    padding: 12px 25px;
+    background: #a47700;
+    color: white;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 15px;
+}
+
+footer {
+    margin-top: 35px;
+    background: #081f15;
+    color: #eee6d2;
+    text-align: center;
+    padding: 25px 20px;
+    font-size: 14px;
+    border-top: 3px solid #c9a227;
+}
+
+footer strong {
+    color: #e4c55d;
+}
+
+@media (max-width: 700px) {
+
+    header {
+        padding: 22px 15px;
+    }
+
+    .logo {
+        width: 78px;
+        height: 78px;
+    }
+
+    header h1 {
+        font-size: 28px;
+    }
+
+    .hero {
+        padding: 50px 18px;
+    }
+
+    .hero h2 {
+        font-size: 29px;
+    }
+
+    .hero p {
+        font-size: 16px;
+    }
+
+    .container {
+        padding: 35px 15px;
+    }
+
+    .category-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .book-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .cover {
+        height: 390px;
+    }
+
+    nav button {
+        padding: 14px 18px;
+    }
+
+    .about-box {
+        padding: 28px 20px;
+    }
+}
+
+@media (max-width: 400px) {
+
+    .hero h2 {
+        font-size: 25px;
+    }
+
+    .cover {
+        height: 350px;
+    }
+
+    .book-card h3 {
+        font-size: 18px;
+    }
+}
+
+</style>
+
 </head>
-
 
 <body>
 
-
-<!-- TOP SECTION -->
-
 <div class="site-top" id="siteTop">
 
-    <header>
+<header>
 
-        <img
-            src="his-story-logo.png"
-            alt="His-Story Logo"
-            class="logo"
-        >
+<img
+    src="his-story-logo.png"
+    alt="His-Story Logo"
+    class="logo"
+>
 
-        <h1>
-            His-Story
-        </h1>
+<h1>His-Story</h1>
 
-        <p>
-            Stories that remember. History that lives.
-        </p>
+<p>
+    Stories that remember. History that lives.
+</p>
 
-    </header>
+</header>
 
+<nav>
 
-    <nav>
+<button
+    type="button"
+    onclick="showPage('home')"
+>
+    Home
+</button>
 
-        <button
-            type="button"
-            onclick="showPage('home')"
-        >
-            Home
-        </button>
+<button
+    type="button"
+    class="about-nav-btn"
+    onclick="showPage('about')"
+>
+    ✦ About His-Story
+</button>
 
-        <button
-            type="button"
-            onclick="showPage('history')"
-        >
-            History
-        </button>
+</nav>
 
-        <button
-            type="button"
-            onclick="showPage('stories')"
-        >
-            Stories
-        </button>
+<section class="hero">
 
-        <button
-            type="button"
-            onclick="showPage('about')"
-        >
-            About
-        </button>
+<h2>
+    Stories That Remember. History That Lives.
+</h2>
 
-    </nav>
+<div class="gold-line"></div>
 
+<p>
+    Discover the history of people, places, civilizations,
+    kingdoms, cultures, discoveries and important events from
+    around the world through carefully prepared books and stories.
+</p>
 
-    <section class="hero">
-
-        <h2>
-            Stories That Remember. History That Lives.
-        </h2>
-
-        <div class="gold-line"></div>
-
-        <p>
-            Discover the history of people, places, civilizations,
-            kingdoms, cultures, discoveries and important events from
-            around the world through carefully prepared books and stories.
-        </p>
-
-    </section>
+</section>
 
 </div>
 
 
-<!-- MAIN -->
-
 <main class="container">
 
 
-    <!-- HOME -->
+<section id="home" class="page active">
 
-    <section
-        id="home"
-        class="page active"
-    >
+<h2 class="page-title">
+    Explore His-Story
+</h2>
 
-        <h2 class="page-title">
-            Explore His-Story
-        </h2>
+<p class="section-subtitle">
+    Step into the past through history and discover original
+    stories filled with wisdom, mystery and imagination.
+</p>
 
-        <p class="section-subtitle">
-            Step into the past through history and discover original
-            stories filled with wisdom, mystery and imagination.
-        </p>
+<div class="category-grid">
 
+<div
+    class="category-card"
+    onclick="showPage('history')"
+>
 
-        <div class="category-grid">
+<div class="category-icon">📚</div>
 
+<h3>History</h3>
 
-            <div
-                class="category-card"
-                onclick="showPage('history')"
-            >
+<p>
+    Explore important people, events, civilizations,
+    places and moments that shaped our world.
+</p>
 
-                <div class="category-icon">
-                    📚
-                </div>
+</div>
 
-                <h3>
-                    History
-                </h3>
 
-                <p>
-                    Explore important people, events, civilizations,
-                    places and moments that shaped our world.
-                </p>
+<div
+    class="category-card"
+    onclick="showPage('stories')"
+>
 
-            </div>
+<div class="category-icon">📖</div>
 
+<h3>Stories</h3>
 
-            <div
-                class="category-card"
-                onclick="showPage('stories')"
-            >
+<p>
+    Discover original stories filled with adventure,
+    mystery, wisdom and meaningful life lessons.
+</p>
 
-                <div class="category-icon">
-                    📖
-                </div>
+</div>
 
-                <h3>
-                    Stories
-                </h3>
+</div>
 
-                <p>
-                    Discover original stories filled with adventure,
-                    mystery, wisdom and meaningful life lessons.
-                </p>
+</section>
 
-            </div>
 
-        </div>
+<section id="history" class="page">
 
-    </section>
+<h2 class="page-title">
+    History Books
+</h2>
 
+<p class="section-subtitle">
+    Discover carefully prepared histories of people,
+    nations and events that shaped our world.
+</p>
 
-    <!-- HISTORY -->
+<div class="book-grid">
 
-    <section
-        id="history"
-        class="page"
-    >
 
-        <h2 class="page-title">
-            History Books
-        </h2>
+<div class="book-card">
 
-        <p class="section-subtitle">
-            Discover carefully prepared histories of people, nations
-            and events that shaped our world.
-        </p>
+<div class="cover">
 
+<img
+    src="the_history_of_ghana_cover.png"
+    alt="The History of Ghana"
+>
 
-        <div class="book-grid">
+</div>
 
+<h3>
+    THE HISTORY OF GHANA
+</h3>
 
-            <!-- GHANA -->
+<div class="price">
+    GH¢25
+</div>
 
-            <div class="book-card">
+<input
+    type="email"
+    id="ghanaEmail"
+    placeholder="Enter your email"
+>
 
-                <div class="cover">
+<button
+    type="button"
+    class="buy-btn"
+    onclick="buyBook('ghana')"
+>
+    Buy The History of Ghana — GH¢25
+</button>
 
-                    <img
-                        src="the_history_of_ghana_cover.png"
-                        alt="The History of Ghana"
-                    >
+<div
+    class="message"
+    id="ghanaMessage"
+></div>
 
-                </div>
+</div>
 
-                <h3>
-                    THE HISTORY OF GHANA
-                </h3>
 
-                <div class="price">
-                    GH¢25
-                </div>
+<div class="book-card">
 
-                <input
-                    type="email"
-                    id="ghanaEmail"
-                    placeholder="Enter your email"
-                >
+<div class="cover">
 
-                <button
-                    type="button"
-                    class="buy-btn"
-                    onclick="buyBook('ghana')"
-                >
-                    Buy The History of Ghana — GH¢25
-                </button>
+<img
+    src="the_history_of_osagyefo_dr_kwame_nkrumah_cover.png"
+    alt="The History of Osagyefo Dr. Kwame Nkrumah"
+>
 
-                <div
-                    class="message"
-                    id="ghanaMessage"
-                ></div>
+</div>
 
-            </div>
+<h3>
+    THE HISTORY OF OSAGYEFO DR. KWAME NKRUMAH
+</h3>
 
+<div class="price">
+    GH¢25
+</div>
 
-            <!-- NKRUMAH -->
+<input
+    type="email"
+    id="nkrumahEmail"
+    placeholder="Enter your email"
+>
 
-            <div class="book-card">
+<button
+    type="button"
+    class="buy-btn"
+    onclick="buyBook('nkrumah')"
+>
+    Buy The History of Kwame Nkrumah — GH¢25
+</button>
 
-                <div class="cover">
+<div
+    class="message"
+    id="nkrumahMessage"
+></div>
 
-                    <img
-                        src="the_history_of_osagyefo_dr_kwame_nkrumah_cover.png"
-                        alt="The History of Osagyefo Dr. Kwame Nkrumah"
-                    >
+</div>
 
-                </div>
+</div>
 
-                <h3>
-                    THE HISTORY OF OSAGYEFO DR. KWAME NKRUMAH
-                </h3>
+<button
+    type="button"
+    class="back-btn"
+    onclick="showPage('home')"
+>
+    Back to Home
+</button>
 
-                <div class="price">
-                    GH¢25
-                </div>
+</section>
 
-                <input
-                    type="email"
-                    id="nkrumahEmail"
-                    placeholder="Enter your email"
-                >
 
-                <button
-                    type="button"
-                    class="buy-btn"
-                    onclick="buyBook('nkrumah')"
-                >
-                    Buy The History of Kwame Nkrumah — GH¢25
-                </button>
+<section id="stories" class="page">
 
-                <div
-                    class="message"
-                    id="nkrumahMessage"
-                ></div>
+<h2 class="page-title">
+    Story Books
+</h2>
 
-            </div>
+<p class="section-subtitle">
+    Enter worlds of imagination, mystery, adventure and wisdom
+    through original His-Story stories.
+</p>
 
-        </div>
+<div class="book-grid">
 
 
-        <button
-            type="button"
-            class="back-btn"
-            onclick="showPage('home')"
-        >
-            Back to Home
-        </button>
+<div class="book-card">
 
-    </section>
+<div class="cover">
 
+<img
+    src="the_boy_who_sold_his_shadow_cover.png"
+    alt="The Boy Who Sold His Shadow"
+>
 
-    <!-- STORIES -->
+</div>
 
-    <section
-        id="stories"
-        class="page"
-    >
+<h3>
+    The Boy Who Sold His Shadow
+</h3>
 
-        <h2 class="page-title">
-            Story Books
-        </h2>
+<div class="price">
+    GH¢20
+</div>
 
-        <p class="section-subtitle">
-            Enter worlds of imagination, mystery, adventure and wisdom
-            through original His-Story stories.
-        </p>
+<input
+    type="email"
+    id="shadowEmail"
+    placeholder="Enter your email"
+>
 
+<button
+    type="button"
+    class="buy-btn"
+    onclick="buyBook('shadow')"
+>
+    Buy The Boy Who Sold His Shadow — GH¢20
+</button>
 
-        <div class="book-grid">
+<div
+    class="message"
+    id="shadowMessage"
+></div>
 
+</div>
 
-            <!-- BOY WHO SOLD HIS SHADOW -->
 
-            <div class="book-card">
+<div class="book-card">
 
-                <div class="cover">
+<div class="cover">
 
-                    <img
-                        src="the_boy_who_sold_his_shadow_cover.png"
-                        alt="The Boy Who Sold His Shadow"
-                    >
+<img
+    src="the_village_that_forgot_its_name_cover.png"
+    alt="The Village That Forgot Its Name"
+>
 
-                </div>
+</div>
 
-                <h3>
-                    The Boy Who Sold His Shadow
-                </h3>
+<h3>
+    The Village That Forgot Its Name
+</h3>
 
-                <div class="price">
-                    GH¢20
-                </div>
+<div class="price">
+    GH¢20
+</div>
 
-                <input
-                    type="email"
-                    id="shadowEmail"
-                    placeholder="Enter your email"
-                >
+<input
+    type="email"
+    id="villageEmail"
+    placeholder="Enter your email"
+>
 
-                <button
-                    type="button"
-                    class="buy-btn"
-                    onclick="buyBook('shadow')"
-                >
-                    Buy The Boy Who Sold His Shadow — GH¢20
-                </button>
+<button
+    type="button"
+    class="buy-btn"
+    onclick="buyBook('village')"
+>
+    Buy The Village That Forgot Its Name — GH¢20
+</button>
 
-                <div
-                    class="message"
-                    id="shadowMessage"
-                ></div>
+<div
+    class="message"
+    id="villageMessage"
+></div>
 
-            </div>
+</div>
 
+</div>
 
-            <!-- VILLAGE -->
+<button
+    type="button"
+    class="back-btn"
+    onclick="showPage('home')"
+>
+    Back to Home
+</button>
 
-            <div class="book-card">
+</section>
 
-                <div class="cover">
 
-                    <img
-                        src="the_village_that_forgot_its_name_cover.png"
-                        alt="The Village That Forgot Its Name"
-                    >
+<section id="about" class="page">
 
-                </div>
+<h2 class="page-title">
+    About His-Story
+</h2>
 
-                <h3>
-                    The Village That Forgot Its Name
-                </h3>
+<p class="section-subtitle">
+    Discover what His-Story is, why it exists, and what readers
+    can find on the platform.
+</p>
 
-                <div class="price">
-                    GH¢20
-                </div>
+<div class="about-box">
 
-                <input
-                    type="email"
-                    id="villageEmail"
-                    placeholder="Enter your email"
-                >
+<h3>
+    What is His-Story?
+</h3>
 
-                <button
-                    type="button"
-                    class="buy-btn"
-                    onclick="buyBook('village')"
-                >
-                    Buy The Village That Forgot Its Name — GH¢20
-                </button>
+<p>
+    His-Story is a digital platform created to bring history
+    and storytelling closer to readers. We believe that the
+    past is more than a collection of dates and names.
+    It is made up of people, places, cultures, kingdoms,
+    discoveries, struggles, achievements and events that
+    continue to shape the world.
+</p>
 
-                <div
-                    class="message"
-                    id="villageMessage"
-                ></div>
+<h3>
+    Our Purpose
+</h3>
 
-            </div>
+<p>
+    Our purpose is to make history and storytelling accessible
+    through carefully prepared digital books. His-Story aims
+    to preserve important histories while also creating
+    original stories that entertain, inspire and communicate
+    meaningful lessons.
+</p>
 
-        </div>
+<h3>
+    What Readers Can Find
+</h3>
 
+<p>
+    Readers can explore histories from Ghana, Africa and
+    around the world, learn about important historical
+    figures and events, discover civilizations and cultures,
+    and enjoy original stories filled with adventure,
+    mystery, wisdom and imagination.
+</p>
 
-        <button
-            type="button"
-            class="back-btn"
-            onclick="showPage('home')"
-        >
-            Back to Home
-        </button>
+<div class="about-highlight">
 
-    </section>
+Our goal is simple: to help history remain remembered
+and stories remain alive.
 
+<br><br>
 
-    <!-- ABOUT -->
+Stories that remember. History that lives.
 
-    <section
-        id="about"
-        class="page"
-    >
+</div>
 
-        <h2 class="page-title">
-            About His-Story
-        </h2>
+</div>
 
-        <p class="section-subtitle">
-            Discover what His-Story is, why it exists, and what readers
-            can find on the platform.
-        </p>
+<button
+    type="button"
+    class="back-btn"
+    onclick="showPage('home')"
+>
+    Back to Home
+</button>
 
-
-        <div class="about-box">
-
-            <h3>
-                What is His-Story?
-            </h3>
-
-            <p>
-                His-Story is a digital platform created to bring history
-                and storytelling closer to readers. We believe that the
-                past is more than a collection of dates and names.
-                It is made up of people, places, cultures, kingdoms,
-                discoveries, struggles, achievements and events that
-                continue to shape the world.
-            </p>
-
-
-            <h3>
-                Our Purpose
-            </h3>
-
-            <p>
-                Our purpose is to make history and storytelling accessible
-                through carefully prepared digital books. His-Story aims
-                to preserve important histories while also creating
-                original stories that entertain, inspire and communicate
-                meaningful lessons.
-            </p>
-
-
-            <h3>
-                What Readers Can Find
-            </h3>
-
-            <p>
-                Readers can explore histories from Ghana, Africa and
-                around the world, learn about important historical
-                figures and events, discover civilizations and cultures,
-                and enjoy original stories filled with adventure,
-                mystery, wisdom and imagination.
-            </p>
-
-
-            <div class="about-highlight">
-
-                Our goal is simple: to help history remain remembered
-                and stories remain alive.
-
-                <br><br>
-
-                Stories that remember. History that lives.
-
-            </div>
-
-        </div>
-
-
-        <button
-            type="button"
-            class="back-btn"
-            onclick="showPage('home')"
-        >
-            Back to Home
-        </button>
-
-    </section>
+</section>
 
 </main>
-
-
-<!-- FOOTER -->
-
 <footer>
 
-    <strong>
-        His-Story
-    </strong>
+<strong>His-Story</strong>
 
-    <br>
+<br>
 
-    Stories that remember. History that lives.
+Stories that remember. History that lives.
 
 </footer>
 
 
-<!-- JAVASCRIPT -->
 <script>
 
 function showPage(pageId) {
 
-    const pages = document.querySelectorAll(".page");
+    const pages =
+        document.querySelectorAll(".page");
 
     pages.forEach(function(page) {
         page.classList.remove("active");
     });
 
-    const selectedPage = document.getElementById(pageId);
+    const selectedPage =
+        document.getElementById(pageId);
 
     if (selectedPage) {
         selectedPage.classList.add("active");
     }
 
-    const siteTop = document.getElementById("siteTop");
+    const siteTop =
+        document.getElementById("siteTop");
 
     if (pageId === "home") {
         siteTop.classList.remove("hidden");
@@ -1005,10 +875,8 @@ async function buyBook(bookId) {
 
     }
 
-
     const email =
         emailInput.value.trim();
-
 
     if (!email) {
 
@@ -1019,7 +887,6 @@ async function buyBook(bookId) {
 
     }
 
-
     if (!email.includes("@")) {
 
         message.textContent =
@@ -1029,10 +896,8 @@ async function buyBook(bookId) {
 
     }
 
-
     message.textContent =
         "Connecting to payment...";
-
 
     try {
 
@@ -1054,10 +919,8 @@ async function buyBook(bookId) {
                 }
             );
 
-
         const data =
             await response.json();
-
 
         if (data.authorization_url) {
 
@@ -1086,7 +949,6 @@ async function buyBook(bookId) {
 
 </script>
 
-
-
 </body>
+
 </html>

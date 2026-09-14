@@ -935,7 +935,6 @@
 
 
 <!-- JAVASCRIPT -->
-
 <script>
 
 function showPage(pageId) {
@@ -960,29 +959,7 @@ function showPage(pageId) {
         siteTop.classList.add("hidden");
     }
 
-    function showPage(pageId) {
-
-    const pages = document.querySelectorAll(".page");
-
-    pages.forEach(function(page) {
-        page.classList.remove("active");
-    });
-
-    const selectedPage = document.getElementById(pageId);
-
-    if (selectedPage) {
-        selectedPage.classList.add("active");
-    }
-
-    const siteTop = document.getElementById("siteTop");
-
-    if (pageId === "home") {
-        siteTop.classList.remove("hidden");
-    } else {
-        siteTop.classList.add("hidden");
-    }
-
-    }
+}
 
 
 async function buyBook(bookId) {
@@ -1039,6 +1016,7 @@ async function buyBook(bookId) {
             "Please enter your email address.";
 
         return;
+
     }
 
 
@@ -1048,6 +1026,7 @@ async function buyBook(bookId) {
             "Please enter a valid email address.";
 
         return;
+
     }
 
 
@@ -1106,6 +1085,8 @@ async function buyBook(bookId) {
 }
 
 </script>
+
+
 
 </body>
 </html>

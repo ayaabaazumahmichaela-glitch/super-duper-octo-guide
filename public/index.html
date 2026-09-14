@@ -2,8 +2,13 @@
 <html lang="en">
 
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
 <title>His-Story | History & Stories</title>
 
@@ -20,6 +25,9 @@ body {
     color: #26231d;
 }
 
+
+/* TOP SECTION */
+
 .site-top {
     display: block;
 }
@@ -27,6 +35,9 @@ body {
 .site-top.hidden {
     display: none;
 }
+
+
+/* HEADER */
 
 header {
     background: #0a2318;
@@ -54,6 +65,9 @@ header p {
     color: #e7d49a;
     font-size: 15px;
 }
+
+
+/* NAVIGATION */
 
 nav {
     background: #081f15;
@@ -90,6 +104,9 @@ nav button:hover {
     color: #081f15 !important;
 }
 
+
+/* HERO */
+
 .hero {
     text-align: center;
     padding: 70px 20px;
@@ -120,6 +137,9 @@ nav button:hover {
     color: #4b463b;
 }
 
+
+/* MAIN */
+
 .container {
     max-width: 1100px;
     margin: auto;
@@ -149,6 +169,9 @@ nav button:hover {
     line-height: 1.6;
 }
 
+
+/* HOME CATEGORY CARDS */
+
 .category-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -168,6 +191,10 @@ nav button:hover {
     box-shadow: 0 8px 25px rgba(42,35,20,.08);
 }
 
+.category-card:hover {
+    transform: translateY(-5px);
+}
+
 .category-icon {
     font-size: 43px;
     margin-bottom: 8px;
@@ -185,9 +212,13 @@ nav button:hover {
     margin: 0;
 }
 
+
+/* BOOKS */
+
 .book-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(270px,1fr));
+    grid-template-columns:
+        repeat(auto-fit, minmax(270px, 1fr));
     gap: 28px;
 }
 
@@ -257,7 +288,9 @@ nav button:hover {
     font-size: 14px;
     color: #b00020;
 }
-    .about-box {
+    /* ABOUT */
+
+.about-box {
     max-width: 850px;
     margin: 0 auto;
     background: #fffdf8;
@@ -291,6 +324,55 @@ nav button:hover {
     line-height: 1.7;
 }
 
+
+/* CONTACT */
+
+.contact-box {
+    max-width: 700px;
+    margin: 0 auto;
+    background: #fffdf8;
+    border: 1px solid #ddd2b5;
+    border-top: 5px solid #c9a227;
+    border-radius: 14px;
+    padding: 35px 30px;
+    box-shadow: 0 8px 25px rgba(42,35,20,.08);
+}
+
+.contact-box h3 {
+    color: #123d2a;
+    font-size: 24px;
+    margin-top: 0;
+}
+
+.contact-box p {
+    color: #4f4a40;
+    line-height: 1.8;
+}
+
+.contact-box input,
+.contact-box textarea {
+    width: 100%;
+    padding: 13px;
+    margin: 8px 0;
+    border: 1px solid #c9c0aa;
+    border-radius: 7px;
+    font-family: Arial, sans-serif;
+    font-size: 15px;
+}
+
+.contact-box textarea {
+    resize: vertical;
+}
+
+.contact-box input:focus,
+.contact-box textarea:focus {
+    outline: 2px solid #c9a227;
+    border-color: #c9a227;
+}
+
+
+/* BACK BUTTON */
+
 .back-btn {
     display: block;
     margin: 35px auto 0;
@@ -303,6 +385,9 @@ nav button:hover {
     font-family: Georgia, "Times New Roman", serif;
     font-size: 15px;
 }
+
+
+/* FOOTER */
 
 footer {
     margin-top: 35px;
@@ -317,6 +402,9 @@ footer {
 footer strong {
     color: #e4c55d;
 }
+
+
+/* MOBILE */
 
 @media (max-width: 700px) {
 
@@ -365,10 +453,12 @@ footer strong {
         padding: 14px 18px;
     }
 
-    .about-box {
+    .about-box,
+    .contact-box {
         padding: 28px 20px;
     }
 }
+
 
 @media (max-width: 400px) {
 
@@ -383,6 +473,7 @@ footer strong {
     .book-card h3 {
         font-size: 18px;
     }
+
 }
 
 </style>
@@ -390,6 +481,7 @@ footer strong {
 </head>
 
 <body>
+
 
 <div class="site-top" id="siteTop">
 
@@ -401,13 +493,16 @@ footer strong {
     class="logo"
 >
 
-<h1>His-Story</h1>
+<h1>
+    His-Story
+</h1>
 
 <p>
     Stories that remember. History that lives.
 </p>
 
 </header>
+
 
 <nav>
 
@@ -426,7 +521,15 @@ footer strong {
     ✦ About His-Story
 </button>
 
+<button
+    type="button"
+    onclick="showPage('contact')"
+>
+    Contact
+</button>
+
 </nav>
+
 
 <section class="hero">
 
@@ -450,7 +553,10 @@ footer strong {
 <main class="container">
 
 
-<section id="home" class="page active">
+<section
+    id="home"
+    class="page active"
+>
 
 <h2 class="page-title">
     Explore His-Story
@@ -461,16 +567,22 @@ footer strong {
     stories filled with wisdom, mystery and imagination.
 </p>
 
+
 <div class="category-grid">
+
 
 <div
     class="category-card"
     onclick="showPage('history')"
 >
 
-<div class="category-icon">📚</div>
+<div class="category-icon">
+    📚
+</div>
 
-<h3>History</h3>
+<h3>
+    History
+</h3>
 
 <p>
     Explore important people, events, civilizations,
@@ -485,9 +597,13 @@ footer strong {
     onclick="showPage('stories')"
 >
 
-<div class="category-icon">📖</div>
+<div class="category-icon">
+    📖
+</div>
 
-<h3>Stories</h3>
+<h3>
+    Stories
+</h3>
 
 <p>
     Discover original stories filled with adventure,
@@ -496,12 +612,16 @@ footer strong {
 
 </div>
 
+
 </div>
 
 </section>
 
 
-<section id="history" class="page">
+<section
+    id="history"
+    class="page"
+>
 
 <h2 class="page-title">
     History Books
@@ -511,6 +631,7 @@ footer strong {
     Discover carefully prepared histories of people,
     nations and events that shaped our world.
 </p>
+
 
 <div class="book-grid">
 
@@ -596,7 +717,9 @@ footer strong {
 
 </div>
 
+
 </div>
+
 
 <button
     type="button"
@@ -607,18 +730,20 @@ footer strong {
 </button>
 
 </section>
-
-
-<section id="stories" class="page">
+<section
+    id="stories"
+    class="page"
+>
 
 <h2 class="page-title">
     Story Books
 </h2>
 
 <p class="section-subtitle">
-    Enter worlds of imagination, mystery, adventure and wisdom
-    through original His-Story stories.
+    Enter worlds of imagination, mystery and wisdom through
+    original stories created for His-Story.
 </p>
+
 
 <div class="book-grid">
 
@@ -704,7 +829,9 @@ footer strong {
 
 </div>
 
+
 </div>
+
 
 <button
     type="button"
@@ -717,68 +844,51 @@ footer strong {
 </section>
 
 
-<section id="about" class="page">
+<section
+    id="about"
+    class="page"
+>
 
 <h2 class="page-title">
     About His-Story
 </h2>
 
 <p class="section-subtitle">
-    Discover what His-Story is, why it exists, and what readers
-    can find on the platform.
+    A place where the past is remembered and stories continue
+    to live.
 </p>
+
 
 <div class="about-box">
 
 <h3>
-    What is His-Story?
+    ✦ Why His-Story?
 </h3>
 
 <p>
-    His-Story is a digital platform created to bring history
-    and storytelling closer to readers. We believe that the
-    past is more than a collection of dates and names.
-    It is made up of people, places, cultures, kingdoms,
-    discoveries, struggles, achievements and events that
-    continue to shape the world.
+    His-Story is a digital library created to make history and
+    original storytelling easier to discover and enjoy.
 </p>
 
-<h3>
-    Our Purpose
-</h3>
-
 <p>
-    Our purpose is to make history and storytelling accessible
-    through carefully prepared digital books. His-Story aims
-    to preserve important histories while also creating
-    original stories that entertain, inspire and communicate
-    meaningful lessons.
+    The History section explores people, civilizations,
+    kingdoms, cultures, places, discoveries and important
+    events from around the world.
 </p>
 
-<h3>
-    What Readers Can Find
-</h3>
-
 <p>
-    Readers can explore histories from Ghana, Africa and
-    around the world, learn about important historical
-    figures and events, discover civilizations and cultures,
-    and enjoy original stories filled with adventure,
-    mystery, wisdom and imagination.
+    The Stories section brings readers original stories that
+    combine imagination, mystery, wisdom and meaningful
+    lessons.
 </p>
 
 <div class="about-highlight">
-
-Our goal is simple: to help history remain remembered
-and stories remain alive.
-
-<br><br>
-
-Stories that remember. History that lives.
-
+    History helps us understand where we came from.
+    Stories help us imagine where we can go.
 </div>
 
 </div>
+
 
 <button
     type="button"
@@ -790,24 +900,107 @@ Stories that remember. History that lives.
 
 </section>
 
+
+<section
+    id="contact"
+    class="page"
+>
+
+<h2 class="page-title">
+    Contact His-Story
+</h2>
+
+<p class="section-subtitle">
+    Have a question, suggestion or feedback about His-Story?
+    Use the form below.
+</p>
+
+
+<div class="contact-box">
+
+<h3>
+    Send a Message
+</h3>
+
+<p>
+    We value your questions, ideas and feedback about
+    His-Story.
+</p>
+
+
+<input
+    type="text"
+    id="contactName"
+    placeholder="Your name"
+>
+
+
+<input
+    type="email"
+    id="contactEmail"
+    placeholder="Your email address"
+>
+
+
+<textarea
+    id="contactMessage"
+    rows="6"
+    placeholder="Write your message..."
+></textarea>
+
+
+<button
+    type="button"
+    class="buy-btn"
+    onclick="prepareMessage()"
+>
+    Prepare Message
+</button>
+
+
+<div
+    class="message"
+    id="contactStatus"
+></div>
+
+</div>
+
+
+<button
+    type="button"
+    class="back-btn"
+    onclick="showPage('home')"
+>
+    Back to Home
+</button>
+
+</section>
 </main>
+
+
 <footer>
 
-<strong>His-Story</strong>
+<p>
+    <strong>His-Story</strong>
+</p>
 
-<br>
+<p>
+    Stories that remember. History that lives.
+</p>
 
-Stories that remember. History that lives.
+<p>
+    © 2026 His-Story. All rights reserved.
+</p>
 
 </footer>
 
 
 <script>
 
+
 function showPage(pageId) {
 
-    const pages =
-        document.querySelectorAll(".page");
+    const pages = document.querySelectorAll(".page");
 
     pages.forEach(function(page) {
         page.classList.remove("active");
@@ -836,6 +1029,7 @@ async function buyBook(bookId) {
 
     let emailInput;
     let message;
+
 
     if (bookId === "shadow") {
 
@@ -875,8 +1069,10 @@ async function buyBook(bookId) {
 
     }
 
+
     const email =
         emailInput.value.trim();
+
 
     if (!email) {
 
@@ -887,6 +1083,7 @@ async function buyBook(bookId) {
 
     }
 
+
     if (!email.includes("@")) {
 
         message.textContent =
@@ -896,8 +1093,10 @@ async function buyBook(bookId) {
 
     }
 
+
     message.textContent =
         "Connecting to payment...";
+
 
     try {
 
@@ -919,8 +1118,10 @@ async function buyBook(bookId) {
                 }
             );
 
+
         const data =
             await response.json();
+
 
         if (data.authorization_url) {
 
@@ -947,7 +1148,54 @@ async function buyBook(bookId) {
 
 }
 
+
+function prepareMessage() {
+
+    const name =
+        document.getElementById("contactName")
+            .value.trim();
+
+    const email =
+        document.getElementById("contactEmail")
+            .value.trim();
+
+    const message =
+        document.getElementById("contactMessage")
+            .value.trim();
+
+    const status =
+        document.getElementById("contactStatus");
+
+
+    if (!name || !email || !message) {
+
+        status.textContent =
+            "Please complete all the fields.";
+
+        return;
+
+    }
+
+
+    if (!email.includes("@")) {
+
+        status.textContent =
+            "Please enter a valid email address.";
+
+        return;
+
+    }
+
+
+    status.textContent =
+        "Your message has been prepared. " +
+        "An official His-Story contact channel can be connected to this form later.";
+
+}
+
+
 </script>
+
 
 </body>
 

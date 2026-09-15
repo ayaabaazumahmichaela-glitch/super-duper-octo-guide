@@ -25,9 +25,6 @@ body {
     color: #26231d;
 }
 
-
-/* TOP SECTION */
-
 .site-top {
     display: block;
 }
@@ -35,9 +32,6 @@ body {
 .site-top.hidden {
     display: none;
 }
-
-
-/* HEADER */
 
 header {
     background: #0a2318;
@@ -65,9 +59,6 @@ header p {
     color: #e7d49a;
     font-size: 15px;
 }
-
-
-/* NAVIGATION */
 
 nav {
     background: #081f15;
@@ -104,9 +95,6 @@ nav button:hover {
     color: #081f15 !important;
 }
 
-
-/* HERO */
-
 .hero {
     text-align: center;
     padding: 70px 20px;
@@ -137,9 +125,6 @@ nav button:hover {
     color: #4b463b;
 }
 
-
-/* MAIN */
-
 .container {
     max-width: 1100px;
     margin: auto;
@@ -168,9 +153,6 @@ nav button:hover {
     color: #6b6457;
     line-height: 1.6;
 }
-
-
-/* HOME CATEGORY CARDS */
 
 .category-grid {
     display: grid;
@@ -211,9 +193,6 @@ nav button:hover {
     line-height: 1.7;
     margin: 0;
 }
-
-
-/* BOOKS */
 
 .book-grid {
     display: grid;
@@ -288,86 +267,105 @@ nav button:hover {
     font-size: 14px;
     color: #b00020;
 }
-    /* ABOUT */
+    /* PROFESSIONAL CONTACT */
 
-.about-box {
-    max-width: 850px;
-    margin: 0 auto;
-    background: #fffdf8;
-    border: 1px solid #ddd2b5;
-    border-top: 5px solid #c9a227;
-    border-radius: 14px;
-    padding: 35px 30px;
-    box-shadow: 0 8px 25px rgba(42,35,20,.08);
+.contact-intro {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 30px;
 }
 
-.about-box h3 {
+.contact-intro h3 {
     color: #123d2a;
-    font-size: 24px;
-    margin-top: 0;
+    font-size: 25px;
+    margin: 0 0 12px;
 }
 
-.about-box p {
-    color: #4f4a40;
-    line-height: 1.9;
-    font-size: 16px;
-    margin-bottom: 20px;
+.contact-intro p {
+    color: #5d574b;
+    line-height: 1.8;
+    margin: 0;
 }
-
-.about-highlight {
-    margin-top: 28px;
-    padding: 20px;
-    background: #f1ead7;
-    border-left: 4px solid #c9a227;
-    color: #123d2a;
-    font-weight: bold;
-    line-height: 1.7;
-}
-
-
-/* CONTACT */
 
 .contact-box {
-    max-width: 700px;
+    max-width: 720px;
     margin: 0 auto;
     background: #fffdf8;
     border: 1px solid #ddd2b5;
     border-top: 5px solid #c9a227;
-    border-radius: 14px;
-    padding: 35px 30px;
-    box-shadow: 0 8px 25px rgba(42,35,20,.08);
+    border-radius: 16px;
+    padding: 35px;
+    box-shadow: 0 10px 30px rgba(42,35,20,.09);
 }
 
-.contact-box h3 {
+.contact-box label {
+    display: block;
     color: #123d2a;
-    font-size: 24px;
-    margin-top: 0;
+    font-weight: bold;
+    margin: 16px 0 7px;
 }
 
-.contact-box p {
-    color: #4f4a40;
-    line-height: 1.8;
+.contact-box label:first-of-type {
+    margin-top: 0;
 }
 
 .contact-box input,
+.contact-box select,
 .contact-box textarea {
     width: 100%;
-    padding: 13px;
-    margin: 8px 0;
+    padding: 14px;
     border: 1px solid #c9c0aa;
-    border-radius: 7px;
+    border-radius: 8px;
+    background: #fff;
     font-family: Arial, sans-serif;
     font-size: 15px;
 }
 
 .contact-box textarea {
+    min-height: 150px;
     resize: vertical;
 }
 
 .contact-box input:focus,
+.contact-box select:focus,
 .contact-box textarea:focus {
     outline: 2px solid #c9a227;
     border-color: #c9a227;
+}
+
+.contact-note {
+    margin-top: 18px;
+    padding: 15px;
+    background: #f1ead7;
+    border-left: 4px solid #c9a227;
+    color: #514b40;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.contact-action {
+    width: 100%;
+    margin-top: 20px;
+    padding: 14px;
+    background: #123d2a;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.contact-action:hover {
+    background: #174d35;
+}
+
+.contact-status {
+    min-height: 22px;
+    margin-top: 12px;
+    text-align: center;
+    color: #123d2a;
+    font-size: 14px;
+    line-height: 1.5;
 }
 
 
@@ -910,48 +908,92 @@ footer strong {
     Contact His-Story
 </h2>
 
-<p class="section-subtitle">
+<div class="contact-intro">
+
+<h3>
+    We'd Love to Hear From You
+</h3>
+
+<p>
     Have a question, suggestion or feedback about His-Story?
-    Use the form below.
+    Fill out the form below and prepare your message.
 </p>
+
+</div>
 
 
 <div class="contact-box">
 
-<h3>
-    Send a Message
-</h3>
-
-<p>
-    We value your questions, ideas and feedback about
-    His-Story.
-</p>
-
+<label for="contactName">
+    Your Name
+</label>
 
 <input
     type="text"
     id="contactName"
-    placeholder="Your name"
+    placeholder="Enter your name"
 >
 
+
+<label for="contactEmail">
+    Email Address
+</label>
 
 <input
     type="email"
     id="contactEmail"
-    placeholder="Your email address"
+    placeholder="Enter your email address"
 >
 
 
+<label for="contactSubject">
+    Subject
+</label>
+
+<select id="contactSubject">
+
+<option value="">
+    Select a subject
+</option>
+
+<option value="Book Question">
+    Book Question
+</option>
+
+<option value="Website Feedback">
+    Website Feedback
+</option>
+
+<option value="Book Suggestion">
+    Book Suggestion
+</option>
+
+<option value="Other">
+    Other
+</option>
+
+</select>
+
+
+<label for="contactMessage">
+    Your Message
+</label>
+
 <textarea
     id="contactMessage"
-    rows="6"
-    placeholder="Write your message..."
+    placeholder="Write your message here..."
 ></textarea>
+
+
+<div class="contact-note">
+    Please make sure your email address is correct before
+    preparing your message.
+</div>
 
 
 <button
     type="button"
-    class="buy-btn"
+    class="contact-action"
     onclick="prepareMessage()"
 >
     Prepare Message
@@ -959,7 +1001,7 @@ footer strong {
 
 
 <div
-    class="message"
+    class="contact-status"
     id="contactStatus"
 ></div>
 
@@ -1000,7 +1042,8 @@ footer strong {
 
 function showPage(pageId) {
 
-    const pages = document.querySelectorAll(".page");
+    const pages =
+        document.querySelectorAll(".page");
 
     pages.forEach(function(page) {
         page.classList.remove("active");
@@ -1152,22 +1195,31 @@ async function buyBook(bookId) {
 function prepareMessage() {
 
     const name =
-        document.getElementById("contactName")
+        document
+            .getElementById("contactName")
             .value.trim();
 
     const email =
-        document.getElementById("contactEmail")
+        document
+            .getElementById("contactEmail")
             .value.trim();
 
+    const subject =
+        document
+            .getElementById("contactSubject")
+            .value;
+
     const message =
-        document.getElementById("contactMessage")
+        document
+            .getElementById("contactMessage")
             .value.trim();
 
     const status =
-        document.getElementById("contactStatus");
+        document
+            .getElementById("contactStatus");
 
 
-    if (!name || !email || !message) {
+    if (!name || !email || !subject || !message) {
 
         status.textContent =
             "Please complete all the fields.";
@@ -1188,8 +1240,8 @@ function prepareMessage() {
 
 
     status.textContent =
-        "Your message has been prepared. " +
-        "An official His-Story contact channel can be connected to this form later.";
+        "Your message is ready. " +
+        "Please keep a copy of your message.";
 
 }
 

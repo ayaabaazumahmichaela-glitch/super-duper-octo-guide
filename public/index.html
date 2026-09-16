@@ -267,7 +267,9 @@ nav button:hover {
     font-size: 14px;
     color: #b00020;
 }
-    /* PROFESSIONAL CONTACT */
+
+
+/* PROFESSIONAL CONTACT */
 
 .contact-intro {
     text-align: center;
@@ -501,7 +503,6 @@ footer strong {
 
 </header>
 
-
 <nav>
 
 <button
@@ -716,8 +717,46 @@ footer strong {
 </div>
 
 
-</div>
+    </div>
+<div class="book-card">
 
+    <div class="cover">
+
+        <img
+            src="The_Empty_Throne_Cover.png"
+            alt="The Empty Throne"
+        >
+
+    </div>
+
+    <h3>
+        The Empty Throne
+    </h3>
+
+    <div class="price">
+        GH¢20
+    </div>
+
+    <input
+        type="email"
+        id="emptyThroneEmail"
+        placeholder="Enter your email"
+    >
+
+    <button
+        type="button"
+        class="buy-btn"
+        onclick="buyBook('emptyThrone')"
+    >
+        Buy The Empty Throne — GH¢20
+    </button>
+
+    <div
+        class="message"
+        id="emptyThroneMessage"
+    ></div>
+
+</div>
 
 <button
     type="button"
@@ -728,6 +767,8 @@ footer strong {
 </button>
 
 </section>
+
+
 <section
     id="stories"
     class="page"
@@ -1038,8 +1079,6 @@ footer strong {
 
 
 <script>
-
-
 function showPage(pageId) {
 
     const pages =
@@ -1105,6 +1144,14 @@ async function buyBook(bookId) {
 
         message =
             document.getElementById("ghanaMessage");
+
+    } else if (bookId === "emptyThrone") {
+
+        emailInput =
+            document.getElementById("emptyThroneEmail");
+
+        message =
+            document.getElementById("emptyThroneMessage");
 
     } else {
 

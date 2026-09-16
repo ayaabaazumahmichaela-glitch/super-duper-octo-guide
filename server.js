@@ -59,6 +59,14 @@ const BOOKS = {
     price: "GH¢25",
     file: "the_history_of_ghana.pdf",
     downloadName: "the_history_of_ghana.pdf"
+  },
+
+  emptyThrone: {
+    name: "The Empty Throne",
+    amount: 2000,
+    price: "GH¢20",
+    file: "The_Empty_Throne_His-Story.pdf",
+    downloadName: "The_Empty_Throne_His-Story.pdf"
   }
 };
 
@@ -149,7 +157,6 @@ app.post("/api/initialize", async (req, res) => {
     });
   }
 });
-
 // ============================================================
 // VERIFY PAYMENT AND DOWNLOAD BOOK
 // ============================================================

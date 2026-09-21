@@ -3,407 +3,408 @@ const path = require("path");
 const fs = require("fs");
 
 const app = express();
+
 const PORT = process.env.PORT || 3000;
 const SECRET_KEY = process.env.PAYSTACK_SECRET_KEY;
 
 console.log(
-  "PAYSTACK KEY LOADED:",
-  !!process.env.PAYSTACK_SECRET_KEY
+    "Paystack key loaded:",
+    SECRET_KEY ? "YES" : "NO"
 );
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// ============================================================
-// SERVE WEBSITE
-// ============================================================
-
 app.use(express.static(path.join(__dirname, "public")));
 
+
+/* =========================
+   HOME PAGE
+========================= */
+
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
+
+    res.sendFile(
+        path.join(__dirname, "public", "index.html")
+    );
+
 });
 
-// ============================================================
-// BOOKS
-// ============================================================
+
+/* =========================
+   BOOKS
+========================= */
 
 const BOOKS = {
-  shadow: {
-    name: "The Boy Who Sold His Shadow",
-    amount: 2000,
-    price: "GH¢20",
-    file: "The_Boy_Who_Sold_His_Shadow_Illustrated.pdf",
-    downloadName: "The_Boy_Who_Sold_His_Shadow_Illustrated.pdf"
-  },
 
-  village: {
-    name: "The Village That Forgot Its Name",
-    amount: 2000,
-    price: "GH¢20",
-    file: "The_Village_That_Forgot_Its_Name_FINAL.pdf",
-    downloadName: "The_Village_That_Forgot_Its_Name_FINAL.pdf"
-  },
+    shadow: {
+        name: "The Boy Who Sold His Shadow",
+        amount: 2000,
+        price: "GH¢20",
+        file: "The_Boy_Who_Sold_His_Shadow_Illustrated.pdf"
+    },
 
-  nkrumah: {
-    name: "THE HISTORY OF OSAGYEFO DR. KWAME NKRUMAH",
-    amount: 2500,
-    price: "GH¢25",
-    file: "the_history_of_osagyefo_dr_kwame_nkrumah.pdf",
-    downloadName: "the_history_of_osagyefo_dr_kwame_nkrumah.pdf"
-  },
+    village: {
+        name: "The Village That Forgot Its Name",
+        amount: 2000,
+        price: "GH¢20",
+        file: "The_Village_That_Forgot_Its_Name_FINAL.pdf"
+    },
 
-  ghana: {
-    name: "THE HISTORY OF GHANA",
-    amount: 2500,
-    price: "GH¢25",
-    file: "the_history_of_ghana.pdf",
-    downloadName: "the_history_of_ghana.pdf"
-  },
+    nkrumah: {
+        name: "The History of Osagyefo Dr. Kwame Nkrumah",
+        amount: 2500,
+        price: "GH¢25",
+        file: "the_history_of_osagyefo_dr_kwame_nkrumah.pdf"
+    },
 
-  emptyThrone: {
-    name: "The Empty Throne",
-    amount: 2000,
-    price: "GH¢20",
-    file: "The_Empty_Throne_His-Story.pdf",
-    downloadName: "The_Empty_Throne_His-Story.pdf"
-  },
+    ghana: {
+        name: "The History of Ghana",
+        amount: 2500,
+        price: "GH¢25",
+        file: "the_history_of_ghana.pdf"
+    },
 
-  worldWar2: {
-    name: "The History of World War II",
-    amount: 2500,
-    price: "GH¢25",
-    file: "The_History_of_World_War_II_His-Story.pdf",
-    downloadName: "The_History_of_World_War_II_His-Story.pdf"
-  }
+    emptyThrone: {
+        name: "The Empty Throne",
+        amount: 2000,
+        price: "GH¢20",
+        file: "The_Empty_Throne_His-Story.pdf"
+    },
+
+    worldWar2: {
+        name: "The History of World War II",
+        amount: 2500,
+        price: "GH¢25",
+        file: "The_History_of_World_War_II_His-Story.pdf"
+    }
+
 };
 
-// ============================================================
-// INITIALIZE PAYSTACK PAYMENT
-// ============================================================
+
+/* =========================
+   INITIALIZE PAYSTACK
+========================= */
 
 app.post("/api/initialize", async (req, res) => {
-  try {
-    if (!SECRET_KEY) {
-      return res.status(500).json({
-        error: "Payment system is not configured."
-      });
-    }
-
-    const { email, bookId } = req.body;
-
-    if (!email || !email.includes("@")) {
-      return res.status(400).json({
-        error: "Please enter a valid email address."
-      });
-    }
-
-    if (!bookId || !BOOKS[bookId]) {
-      return res.status(400).json({
-        error: "Please select a valid book."
-      });
-    }
-
-    const book = BOOKS[bookId];
-
-    const response = await fetch(
-      "https://api.paystack.co/transaction/initialize",
-      {
-        method: "POST",
-
-        headers: {
-          Authorization: `Bearer ${SECRET_KEY}`,
-          "Content-Type": "application/json"
-        },
-
-        body: JSON.stringify({
-          email: email,
-          amount: book.amount,
-          currency: "GHS",
-
-          metadata: {
-            bookId: bookId,
-            product: book.name,
-            price: book.price
-          },
-
-          callback_url:
-            "https://smartbio-books.onrender.com/api/download"
-        })
-      }
-    );
-
-    const data = await response.json();
-
-    if (!data.status || !data.data) {
-      console.error(
-        "Paystack initialization error:",
-        data
-      );
-
-      return res.status(400).json({
-        error:
-          data.message ||
-          "Payment could not be started."
-      });
-    }
-
-    return res.json({
-      authorization_url:
-        data.data.authorization_url
-    });
-
-  } catch (error) {
-    console.error(
-      "INITIALIZE ERROR:",
-      error
-    );
-
-    return res.status(500).json({
-      error:
-        "Something went wrong while starting payment."
-    });
-  }
-});
-
-// ============================================================
-// VERIFY PAYMENT AND DOWNLOAD BOOK
-// ============================================================
-
-app.get("/api/download", async (req, res) => {
-  try {
-    if (!SECRET_KEY) {
-      return res.status(500).send(
-        "Payment system is not configured."
-      );
-    }
-
-    const reference = req.query.reference;
-
-    if (!reference) {
-      return res.status(400).send(
-        "Missing payment reference."
-      );
-    }
-
-    console.log(
-      "VERIFYING PAYMENT:",
-      reference
-    );
-
-    // --------------------------------------------------------
-    // Verify transaction with Paystack
-    // --------------------------------------------------------
-
-    const controller =
-      new AbortController();
-
-    const timeout = setTimeout(
-      () => controller.abort(),
-      15000
-    );
-
-    let response;
 
     try {
-      response = await fetch(
-        `https://api.paystack.co/transaction/verify/${encodeURIComponent(
-          reference
-        )}`,
-        {
-          method: "GET",
 
-          headers: {
-            Authorization:
-              `Bearer ${SECRET_KEY}`
-          },
+        if (!SECRET_KEY) {
 
-          signal: controller.signal
+            return res.status(500).json({
+                error: "Payment system is not configured."
+            });
+
         }
-      );
-    } finally {
-      clearTimeout(timeout);
-    }
 
-    const data = await response.json();
 
-    console.log(
-      "PAYSTACK VERIFICATION RESPONSE:",
-      JSON.stringify(data)
-    );
+        const {
+            email,
+            bookId
+        } = req.body;
 
-    if (
-      !response.ok ||
-      !data.status ||
-      !data.data
-    ) {
-      return res.status(403).send(
-        "Payment could not be verified."
-      );
-    }
 
-    const transaction = data.data;
+        if (!email) {
 
-    // --------------------------------------------------------
-    // Check payment status
-    // --------------------------------------------------------
+            return res.status(400).json({
+                error: "Email is required."
+            });
 
-    if (
-      transaction.status !== "success"
-    ) {
-      return res.status(403).send(
-        "Payment has not been completed successfully."
-      );
-    }
+        }
 
-    // --------------------------------------------------------
-    // Check currency
-    // --------------------------------------------------------
 
-    if (
-      transaction.currency !== "GHS"
-    ) {
-      return res.status(403).send(
-        "Payment currency could not be verified."
-      );
-    }
+        if (!bookId || !BOOKS[bookId]) {
 
-    // --------------------------------------------------------
-    // Read metadata
-    // --------------------------------------------------------
+            return res.status(400).json({
+                error: "Invalid book selected."
+            });
 
-    let metadata =
-      transaction.metadata;
+        }
 
-    if (typeof metadata === "string") {
-      try {
-        metadata = JSON.parse(metadata);
-      } catch (error) {
-        console.error(
-          "METADATA PARSE ERROR:",
-          error
+
+        const book = BOOKS[bookId];
+
+
+        const response = await fetch(
+            "https://api.paystack.co/transaction/initialize",
+            {
+
+                method: "POST",
+
+                headers: {
+
+                    "Authorization":
+                        `Bearer ${SECRET_KEY}`,
+
+                    "Content-Type":
+                        "application/json"
+
+                },
+
+                body: JSON.stringify({
+
+                    email: email,
+
+                    amount: book.amount,
+
+                    currency: "GHS",
+
+                    callback_url:
+                        "https://smartbio-books.onrender.com/api/download",
+
+                    metadata: {
+
+                        bookId: bookId,
+
+                        product: book.name,
+
+                        price: book.price
+
+                    }
+
+                })
+
+            }
         );
 
-        return res.status(403).send(
-          "Invalid payment information."
-        );
-      }
-    }
 
-    const bookId =
-      metadata && metadata.bookId;
+        const data =
+            await response.json();
 
-    if (!bookId) {
-      return res.status(403).send(
-        "Book information was not found in the payment."
-      );
-    }
 
-    const book = BOOKS[bookId];
+        if (!response.ok || !data.status) {
 
-    if (!book) {
-      return res.status(403).send(
-        "Book could not be identified."
-      );
-    }
-
-    // --------------------------------------------------------
-    // Check amount
-    // --------------------------------------------------------
-
-    if (
-      Number(transaction.amount) !==
-      Number(book.amount)
-    ) {
-      return res.status(403).send(
-        "Payment amount could not be verified."
-      );
-    }
-
-    // --------------------------------------------------------
-    // Find PDF
-    // --------------------------------------------------------
-
-    const filePath = path.join(
-      __dirname,
-      "public",
-      book.file
-    );
-
-    console.log(
-      "BOOK FILE:",
-      filePath
-    );
-
-    // --------------------------------------------------------
-    // Check PDF exists
-    // --------------------------------------------------------
-
-    if (!fs.existsSync(filePath)) {
-      console.error(
-        "PDF NOT FOUND:",
-        filePath
-      );
-
-      return res.status(404).send(
-        "The purchased book file could not be found on the server."
-      );
-    }
-
-    // --------------------------------------------------------
-    // Send PDF
-    // --------------------------------------------------------
-
-    console.log(
-      "SENDING BOOK:",
-      book.name
-    );
-
-    return res.download(
-      filePath,
-      book.downloadName,
-      (error) => {
-        if (error) {
-          console.error(
-            "DOWNLOAD ERROR:",
-            error
-          );
-
-          if (!res.headersSent) {
-            res.status(500).send(
-              "The book could not be downloaded."
+            console.error(
+                "Paystack initialize error:",
+                data
             );
-          }
+
+            return res.status(400).json({
+
+                error:
+                    data.message ||
+                    "Unable to initialize payment."
+
+            });
+
         }
-      }
-    );
 
-  } catch (error) {
-    console.error(
-      "DOWNLOAD VERIFICATION ERROR:",
-      error
-    );
 
-    if (
-      error.name === "AbortError"
-    ) {
-      return res.status(504).send(
-        "Paystack verification took too long. Please try again."
-      );
+        return res.json({
+
+            authorization_url:
+                data.data.authorization_url,
+
+            reference:
+                data.data.reference
+
+        });
+
+
+    } catch (error) {
+
+        console.error(
+            "Initialize error:",
+            error
+        );
+
+        return res.status(500).json({
+
+            error:
+                "Something went wrong while starting payment."
+
+        });
+
     }
 
-    return res.status(500).send(
-      "Download verification failed."
-    );
-  }
 });
 
-// ============================================================
-// START SERVER
-// ============================================================
+
+/* =========================
+   VERIFY PAYMENT & DOWNLOAD
+========================= */
+
+app.get("/api/download", async (req, res) => {
+
+    try {
+
+        if (!SECRET_KEY) {
+
+            return res.status(500).send(
+                "Payment system is not configured."
+            );
+
+        }
+
+
+        const reference =
+            req.query.reference;
+
+
+        if (!reference) {
+
+            return res.status(400).send(
+                "Payment reference is missing."
+            );
+
+        }
+
+
+        const response = await fetch(
+
+            `https://api.paystack.co/transaction/verify/${encodeURIComponent(reference)}`,
+
+            {
+
+                method: "GET",
+
+                headers: {
+
+                    "Authorization":
+                        `Bearer ${SECRET_KEY}`
+
+                }
+
+            }
+
+        );
+
+
+        const data =
+            await response.json();
+
+
+        if (
+            !response.ok ||
+            !data.status ||
+            !data.data
+        ) {
+
+            console.error(
+                "Paystack verification error:",
+                data
+            );
+
+            return res.status(400).send(
+                "Unable to verify payment."
+            );
+
+        }
+
+
+        const transaction =
+            data.data;
+
+
+        if (transaction.status !== "success") {
+
+            return res.status(400).send(
+                "Payment was not successful."
+            );
+
+        }
+
+
+        if (transaction.currency !== "GHS") {
+
+            return res.status(400).send(
+                "Invalid payment currency."
+            );
+
+        }
+
+
+        const metadata =
+            transaction.metadata || {};
+
+
+        const bookId =
+            metadata.bookId;
+
+
+        if (!bookId || !BOOKS[bookId]) {
+
+            return res.status(400).send(
+                "Book information is missing."
+            );
+
+        }
+
+
+        const book =
+            BOOKS[bookId];
+
+
+        if (
+            Number(transaction.amount) !==
+            Number(book.amount)
+        ) {
+
+            return res.status(400).send(
+                "Payment amount does not match the book price."
+            );
+
+        }
+
+
+        const filePath =
+            path.join(
+                __dirname,
+                "public",
+                book.file
+            );
+
+
+        if (!fs.existsSync(filePath)) {
+
+            console.error(
+                "Book file not found:",
+                filePath
+            );
+
+            return res.status(404).send(
+                "The book file could not be found."
+            );
+
+        }
+
+
+        console.log(
+            `Payment verified for: ${book.name}`
+        );
+
+
+        return res.download(
+            filePath,
+            book.file
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "Download error:",
+            error
+        );
+
+        return res.status(500).send(
+            "Something went wrong while processing your download."
+        );
+
+    }
+
+});
+
+
+/* =========================
+   START SERVER
+========================= */
 
 app.listen(PORT, () => {
-  console.log(
-    `His-Story Books running on port ${PORT}`
-  );
+
+    console.log(
+        `His-Story server running on port ${PORT}`
+    );
+
 });

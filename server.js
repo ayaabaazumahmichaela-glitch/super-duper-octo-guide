@@ -67,6 +67,14 @@ const BOOKS = {
     price: "GH¢20",
     file: "The_Empty_Throne_His-Story.pdf",
     downloadName: "The_Empty_Throne_His-Story.pdf"
+  },
+
+  worldWar2: {
+    name: "The History of World War II",
+    amount: 2500,
+    price: "GH¢25",
+    file: "The_History_of_World_War_II_His-Story.pdf",
+    downloadName: "The_History_of_World_War_II_His-Story.pdf"
   }
 };
 
@@ -157,6 +165,7 @@ app.post("/api/initialize", async (req, res) => {
     });
   }
 });
+
 // ============================================================
 // VERIFY PAYMENT AND DOWNLOAD BOOK
 // ============================================================

@@ -261,6 +261,10 @@ nav button:hover {
     cursor: pointer;
 }
 
+.buy-btn:hover {
+    background: #174d35;
+}
+
 .message {
     min-height: 20px;
     margin-top: 9px;
@@ -269,7 +273,43 @@ nav button:hover {
 }
 
 
-/* PROFESSIONAL CONTACT */
+/* ABOUT */
+
+.about-box {
+    max-width: 800px;
+    margin: 0 auto;
+    background: #fffdf8;
+    border: 1px solid #ddd2b5;
+    border-top: 5px solid #c9a227;
+    border-radius: 16px;
+    padding: 35px;
+    box-shadow: 0 10px 30px rgba(42,35,20,.09);
+}
+
+.about-box h3 {
+    color: #123d2a;
+    font-size: 25px;
+    margin-top: 0;
+}
+
+.about-box p {
+    color: #5d574b;
+    line-height: 1.8;
+    margin: 15px 0;
+}
+
+.about-highlight {
+    margin-top: 22px;
+    padding: 18px;
+    background: #f1ead7;
+    border-left: 4px solid #c9a227;
+    color: #514b40;
+    line-height: 1.7;
+    font-style: italic;
+}
+
+
+/* CONTACT */
 
 .contact-intro {
     text-align: center;
@@ -386,6 +426,10 @@ nav button:hover {
     font-size: 15px;
 }
 
+.back-btn:hover {
+    background: #7e5b00;
+}
+
 
 /* FOOTER */
 
@@ -457,8 +501,8 @@ footer strong {
     .contact-box {
         padding: 28px 20px;
     }
-}
 
+}
 
 @media (max-width: 400px) {
 
@@ -717,6 +761,47 @@ footer strong {
 </div>
 
 
+<div class="book-card">
+
+<div class="cover">
+
+<img
+    src="The_History_of_World_War_II_Cover.png"
+    alt="The History of World War II"
+>
+
+</div>
+
+<h3>
+    THE HISTORY OF WORLD WAR II
+</h3>
+
+<div class="price">
+    GH¢25
+</div>
+
+<input
+    type="email"
+    id="worldWar2Email"
+    placeholder="Enter your email"
+>
+
+<button
+    type="button"
+    class="buy-btn"
+    onclick="buyBook('worldWar2')"
+>
+    Buy The History of World War II — GH¢25
+</button>
+
+<div
+    class="message"
+    id="worldWar2Message"
+></div>
+
+</div>
+
+
 </div>
 
 
@@ -728,9 +813,7 @@ footer strong {
     Back to Home
 </button>
 
-</section>
-
-
+    </section>
 <section
     id="stories"
     class="page"
@@ -883,7 +966,9 @@ footer strong {
     Back to Home
 </button>
 
-    </section>
+</section>
+
+
 <section
     id="about"
     class="page"
@@ -1078,6 +1163,8 @@ footer strong {
 </p>
 
 </footer>
+
+
 <script>
 
 function showPage(pageId) {
@@ -1122,6 +1209,7 @@ async function buyBook(bookId) {
         message =
             document.getElementById("shadowMessage");
 
+
     } else if (bookId === "village") {
 
         emailInput =
@@ -1129,6 +1217,7 @@ async function buyBook(bookId) {
 
         message =
             document.getElementById("villageMessage");
+
 
     } else if (bookId === "nkrumah") {
 
@@ -1138,6 +1227,7 @@ async function buyBook(bookId) {
         message =
             document.getElementById("nkrumahMessage");
 
+
     } else if (bookId === "ghana") {
 
         emailInput =
@@ -1146,6 +1236,7 @@ async function buyBook(bookId) {
         message =
             document.getElementById("ghanaMessage");
 
+
     } else if (bookId === "emptyThrone") {
 
         emailInput =
@@ -1153,6 +1244,16 @@ async function buyBook(bookId) {
 
         message =
             document.getElementById("emptyThroneMessage");
+
+
+    } else if (bookId === "worldWar2") {
+
+        emailInput =
+            document.getElementById("worldWar2Email");
+
+        message =
+            document.getElementById("worldWar2Message");
+
 
     } else {
 
